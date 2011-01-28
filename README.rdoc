@@ -1,6 +1,39 @@
-= devise_security_extension
+= devise_security_extension (still in development do not use!!!)
 
-Description goes here.
+an security extension for devise
+
+
+== Installation
+add to Gemfile
+  gem 'devise_security_extension'
+
+after bundle execute
+  rails g devise_security_extension:install
+
+== Configuration
+
+ * Todo
+
+== Requirements
+
+* devise (https://github.com/plataformatec/devise)
+* Rails 3 (http://github.com/rails/rails)
+
+== Todo
+
+ * password expire
+ * password rules
+ * easy_captcha for registration
+ * easy_captcha for password forgotten
+ * easy_captcha for unlock instructions
+ * update password with current password
+
+== History
+ * in development
+
+== Maintainers
+
+* Marco Scholl (http://github.com/traxanos)
 
 == Contributing to devise_security_extension
  
