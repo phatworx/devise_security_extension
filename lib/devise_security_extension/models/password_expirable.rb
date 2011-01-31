@@ -1,9 +1,9 @@
 require 'devise_security_extension/hooks/password_expirable'
 
-module Devise
-  module Models
+module Devise # :nodoc:
+  module Models # :nodoc:
 
-    # PasswordExpirable takes care of change password afther
+    # PasswordExpirable takes care of change password after
     module PasswordExpirable
 
       def self.included(base) # :nodoc:

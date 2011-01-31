@@ -6,7 +6,7 @@ require 'devise_security_extension/schema'
 require 'devise_security_extension/controllers/helpers'
 require 'devise_security_extension/rails'
 
-module Devise
+module Devise # :nodoc:
 
   # expire password after e.g 1.year
   mattr_accessor :expire_password_after
@@ -14,7 +14,7 @@ module Devise
 
 end
 
-#
+# an security extension for devise
 module DeviseSecurityExtension
 
 end

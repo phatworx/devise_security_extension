@@ -1,4 +1,5 @@
 module DeviseSecurityExtension
+  # add schema helper for migrations
   module Schema
     # Add password_changed_at columns in the resource's database table.
     #
