@@ -17,7 +17,8 @@ module DeviseSecurityExtension
         def handle_password_change
           Devise.mappings.keys.flatten.any? do |scope|
             if signed_in? scope
-              if warden.session(scope)[:password_expired]
+              Rails.logger.debug warden.session.inspect
+              if warden.session[:password_expired]
                 session["#{scope}_return_to"] = request.path if request.get?
                 redirect_for_password_change scope
                 break

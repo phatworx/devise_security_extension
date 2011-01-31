@@ -31,6 +31,7 @@ after bundle execute
  * easy_captcha for registration
  * easy_captcha for password forgotten
  * easy_captcha for unlock instructions
+ * disable inactive users after time
 
 == History
  * 0.1 expire passwords
