@@ -1,0 +1,5 @@
+de:
+  devise:
+    password_expired:
+      updated: "Das neue Passwort wurde übernommen"
+      change_required: Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!

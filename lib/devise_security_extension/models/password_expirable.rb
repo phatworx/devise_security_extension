@@ -1,3 +1,5 @@
+require 'devise_security_extension/hooks/password_expirable'
+
 module Devise
   module Models
 
@@ -16,7 +18,7 @@ module Devise
       module InstanceMethods # :nodoc:
 
         # is an password change required?
-        def password_change_required?
+        def need_change_password?
           if self.class.expire_password_after.is_a? Fixnum
             self.password_changed_at.nil? or self.password_changed_at < self.class.expire_password_after.ago
           else
