@@ -1,7 +1,6 @@
-= devise_security_extension (still in development do not use!!!)
+= devise_security_extension
 
 an security extension for devise
-
 
 == Installation
 add to Gemfile
@@ -12,24 +11,29 @@ after bundle execute
 
 == Configuration
 
- * Todo
+  Devise.setup do |config|
+    # Should the password expire (e.g 3.months)
+    # config.expire_password_after = false
+  end
 
 == Requirements
 
 * devise (https://github.com/plataformatec/devise)
 * Rails 3 (http://github.com/rails/rails)
 
+== Features
+
+ * expire passwords (update password with current password)
+
 == Todo
 
- * password expire
  * password rules
  * easy_captcha for registration
  * easy_captcha for password forgotten
  * easy_captcha for unlock instructions
- * update password with current password
 
 == History
- * in development
+ * 0.1 expire passwords
 
 == Maintainers
 

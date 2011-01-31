@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/rails.rb",
     "lib/devise_security_extension/routes.rb",
     "lib/devise_security_extension/schema.rb",
+    "lib/generators/devise_security_extension/install_generator.rb",
     "test/helper.rb",
     "test/test_devise_security_extension.rb"
   ]
