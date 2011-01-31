@@ -10,21 +10,13 @@ module Devise
 
   # expire password after e.g 1.year
   mattr_accessor :expire_password_after
-  @@expire_password_after = 3.months
+  @@expire_password_after = false
 
-#  module Models
-#    autoload :PasswordExpirable, 'devise_security_extension/models/password_expirable'
-#  end
+end
 
-  # security extension for enterprise environment
-  #module SecurityExtension
+#
+module DeviseSecurityExtension
 
-   # module Controllers
-    #  autoload :Helpers, 'devise_security_extension/controllers/helpers'
-    #  autoload :PasswordController, 'devise_security_extension/controllers/password_controller'
-    #end
-
-  #end
 end
 
 Devise.add_module :password_expirable, :controller => :password_expirable, :model => 'devise_security_extension/models/password_expirable', :route => :password_expired
