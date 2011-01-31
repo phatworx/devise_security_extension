@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
-  s.date = %q{2011-01-28}
+  s.date = %q{2011-01-31}
   s.description = %q{a gem for extend devise for more password security}
   s.email = %q{develop@marco-scholl.de}
   s.extra_rdoc_files = [
@@ -19,14 +19,22 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "app/controllers/devise/password_expired_controller.rb",
+    "app/views/devise/password_expired/show.html.erb",
+    "config/locales/de.yml",
+    "config/locales/en.yml",
+    "devise_security_extension.gemspec",
     "lib/devise_security_extension.rb",
+    "lib/devise_security_extension/controllers/helpers.rb",
     "lib/devise_security_extension/hooks/password_expirable.rb",
     "lib/devise_security_extension/models/password_expirable.rb",
     "lib/devise_security_extension/rails.rb",
+    "lib/devise_security_extension/routes.rb",
     "lib/devise_security_extension/schema.rb",
     "test/helper.rb",
     "test/test_devise_security_extension.rb"
