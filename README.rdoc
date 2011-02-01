@@ -32,6 +32,7 @@ after bundle execute
 == Features
 
  * expire passwords (update password with current password)
+ * strong password validation
 
 == Todo
 
@@ -42,7 +43,7 @@ after bundle execute
 
 == History
  * 0.1 expire passwords
- * 0.2 strong password
+ * 0.2 strong password validation
 
 == Maintainers
 
