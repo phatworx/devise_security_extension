@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
-  s.date = %q{2011-01-31}
+  s.date = %q{2011-02-01}
   s.description = %q{a gem for extend devise for more password security}
   s.email = %q{develop@marco-scholl.de}
   s.extra_rdoc_files = [
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/controllers/helpers.rb",
     "lib/devise_security_extension/hooks/password_expirable.rb",
     "lib/devise_security_extension/models/password_expirable.rb",
+    "lib/devise_security_extension/models/secure_validatable.rb",
     "lib/devise_security_extension/rails.rb",
     "lib/devise_security_extension/routes.rb",
     "lib/devise_security_extension/schema.rb",
@@ -57,12 +58,14 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, [">= 0"])
       s.add_runtime_dependency(%q<devise>, [">= 0"])
+      s.add_runtime_dependency(%q<rails_email_validator>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
+      s.add_dependency(%q<rails_email_validator>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
@@ -70,6 +73,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rails>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
+    s.add_dependency(%q<rails_email_validator>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])

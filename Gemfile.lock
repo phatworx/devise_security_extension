@@ -62,6 +62,9 @@ GEM
       activesupport (= 3.0.3)
       bundler (~> 1.0)
       railties (= 3.0.3)
+    rails_email_validator (0.1.1)
+      activemodel (>= 3.0.0)
+      activemodel (>= 3.0.0)
     railties (3.0.3)
       actionpack (= 3.0.3)
       activesupport (= 3.0.3)
@@ -84,4 +87,5 @@ DEPENDENCIES
   devise
   jeweler (~> 1.5.2)
   rails
+  rails_email_validator
   rcov

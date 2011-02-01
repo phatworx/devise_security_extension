@@ -12,10 +12,18 @@ after bundle execute
 == Configuration
 
   Devise.setup do |config|
-    # Should the password expire (e.g 3.months)
-    # config.expire_password_after = false
+    # Should the password expire
+    # config.expire_password_after = 3.months
+
+    # Need 1 char of A-Z, a-z and 0-9
+    # config.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
   end
 
+== Model modules
+
+ * :password_expirable - activate that passwords will expire
+ * :secure_validatable - better way to validate model. don't use with :validatable!!!
+ 
 == Requirements
 
 * devise (https://github.com/plataformatec/devise)
@@ -27,7 +35,6 @@ after bundle execute
 
 == Todo
 
- * password rules
  * easy_captcha for registration
  * easy_captcha for password forgotten
  * easy_captcha for unlock instructions
@@ -35,6 +42,7 @@ after bundle execute
 
 == History
  * 0.1 expire passwords
+ * 0.2 strong password
 
 == Maintainers
 
