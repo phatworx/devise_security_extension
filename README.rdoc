@@ -23,7 +23,11 @@ after bundle execute
 
  * :password_expirable - activate that passwords will expire
  * :secure_validatable - better way to validate model. don't use with :validatable!!!
- 
+
+== Schema
+
+ * t.password_expirable
+
 == Requirements
 
 * devise (https://github.com/plataformatec/devise)

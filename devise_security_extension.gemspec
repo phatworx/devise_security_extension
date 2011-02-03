@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
-  s.date = %q{2011-02-01}
+  s.date = %q{2011-02-03}
   s.description = %q{a gem for extend devise for more password security}
   s.email = %q{develop@marco-scholl.de}
   s.extra_rdoc_files = [
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/hooks/password_expirable.rb",
     "lib/devise_security_extension/models/password_expirable.rb",
     "lib/devise_security_extension/models/secure_validatable.rb",
+    "lib/devise_security_extension/orm/active_record.rb",
     "lib/devise_security_extension/rails.rb",
     "lib/devise_security_extension/routes.rb",
     "lib/devise_security_extension/schema.rb",
@@ -44,7 +45,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/traxanos/devise_security_extension}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.5.0}
   s.summary = %q{an security extension for devise}
   s.test_files = [
     "test/helper.rb",
@@ -52,7 +53,6 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
