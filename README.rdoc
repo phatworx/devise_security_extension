@@ -23,10 +23,22 @@ after bundle execute
 
  * :password_expirable - activate that passwords will expire
  * :secure_validatable - better way to validate model. don't use with :validatable!!!
+ * :password_archivable - save password in old_passwords for history checks
 
 == Schema
 
- * t.password_expirable
+=== Password expirable
+
+  create_table :the_resources do |t|
+    t.password_expirable
+  end
+
+=== Password archive
+
+  create_table :old_passwords do
+    t.password_archivable
+  end
+  add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
 
 == Requirements
 
@@ -37,6 +49,7 @@ after bundle execute
 
  * expire passwords (update password with current password)
  * strong password validation
+ * save old passwords for check new passwords
 
 == Todo
 

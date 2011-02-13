@@ -8,8 +8,12 @@ module DeviseSecurityExtension
 
       def add_configs
         inject_into_file "config/initializers/devise.rb", "\n\n  # ==> Security Extension\n  # Configure security extension for devise\n\n" +
-        "  # Should the password expire (e.g 3.months)\n  # config.expire_password_after = false\n" +
-        "  # Need 1 char of A-Z, a-z and 0-9\n  # config.password_regex = /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])/\n" +
+        "  # Should the password expire (e.g 3.months)\n" +
+        "  # config.expire_password_after = false\n" +
+        "  # Need 1 char of A-Z, a-z and 0-9\n" +
+        "  # config.password_regex = /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])/\n" +
+        "  # How often save old passwords in archive\n" +
+        "  # config.password_archiving_count = 5\n" +
         "\n", :before => /end[ |\n|]+\Z/
       end
 
