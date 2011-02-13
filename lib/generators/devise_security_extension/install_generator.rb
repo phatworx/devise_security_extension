@@ -7,7 +7,7 @@ module DeviseSecurityExtension
       desc "Install the devise security extension"
 
       def add_configs
-        inject_into_file "config/initializers/devise.rb", "\n\n  # ==> Security Extension\n  # Configure security extension for devise\n\n" +
+        inject_into_file "config/initializers/devise.rb", "\n  # ==> Security Extension\n  # Configure security extension for devise\n\n" +
         "  # Should the password expire (e.g 3.months)\n" +
         "  # config.expire_password_after = false\n\n" +
         "  # Need 1 char of A-Z, a-z and 0-9\n" +
@@ -15,7 +15,7 @@ module DeviseSecurityExtension
         "  # How often save old passwords in archive\n" +
         "  # config.password_archiving_count = 5\n\n" +
         "  # Deny old password (true, false, count)\n" +
-        "  # config.deny_old_passwords = true\n\n" +
+        "  # config.deny_old_passwords = true" +
         "\n", :before => /end[ |\n|]+\Z/
       end
 
