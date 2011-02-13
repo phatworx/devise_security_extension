@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_devise_security_extension.rb"
   ]
-  s.homepage = %q{http://github.com/traxanos/devise_security_extension}
+  s.homepage = %q{http://github.com/phatworx/devise_security_extension}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.0}
