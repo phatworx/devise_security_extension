@@ -61,6 +61,7 @@ after bundle execute
 == History
  * 0.1 expire passwords
  * 0.2 strong password validation
+ * 0.3 password archivable with validation
 
 == Maintainers
 
