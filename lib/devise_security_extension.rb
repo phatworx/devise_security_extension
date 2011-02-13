@@ -7,19 +7,19 @@ require 'devise'
 
 module Devise # :nodoc:
 
-  # expire password after e.g 1.year
+  # Should the password expire (e.g 3.months)
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
 
-  # validate password for strongness
+  # Validate password for strongness
   mattr_accessor :password_regex
   @@password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
-  # write history of last x passwords
+  # How often save old passwords in archive
   mattr_accessor :password_archiving_count
   @@password_archiving_count = 5
 
-  # deny old password (true, false, integer)
+  # Deny old password (true, false, count)
   mattr_accessor :deny_old_passwords
   @@deny_old_passwords = true
 end
