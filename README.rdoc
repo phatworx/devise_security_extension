@@ -70,6 +70,7 @@ after bundle execute
 
 == Maintainers
 
+* Team Phatworx (http://github.com/phatworx)
 * Marco Scholl (http://github.com/traxanos)
 
 == Contributing to devise_security_extension
