@@ -40,7 +40,7 @@ after bundle execute
 
 === Password archive
 
-  create_table :old_passwords do
+  create_table :old_passwords do |t|
     t.password_archivable
   end
   add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
