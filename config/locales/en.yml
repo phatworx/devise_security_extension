@@ -1,4 +1,7 @@
 en:
+  errors:
+    messages:
+      taken_in_past: Your password cannot be repeated.
   devise:
     password_expired:
       updated: Your new password is saved
