@@ -3,7 +3,7 @@ source "http://rubygems.org"
 # Example:
 gem "rails"
 gem "devise"
-gem "rails_email_validator"
+gem "rails_email_validator", :require => "email_validator"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
