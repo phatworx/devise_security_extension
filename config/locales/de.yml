@@ -1,4 +1,7 @@
 de:
+  errors:
+    messages:
+      taken_in_past: Ihr Passwort kann nicht wiederholt werden.
   devise:
     password_expired:
       updated: "Das neue Passwort wurde übernommen"
