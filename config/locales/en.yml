@@ -1,5 +1,5 @@
 en:
   devise:
     password_expired:
-      updated: Yout new password is saved
-      change_required: You password is expired. Please renew your password!
+      updated: Your new password is saved
+      change_required: Your password is expired. Please renew your password!
