@@ -1,3 +1,5 @@
+require 'rails_email_validator'
+
 module Devise
   module Models
     # SecureValidatable creates better validations with more validation for security
