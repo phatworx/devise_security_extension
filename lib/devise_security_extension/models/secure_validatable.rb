@@ -21,7 +21,7 @@ module Devise
         base.class_eval do
 
           # uniq login
-          validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1]}#, :case_sensitive => case_insensitive_keys.exclude?(authentication_keys[0])
+          validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1]} #, :case_sensitive => case_insensitive_keys.exclude?(authentication_keys[0])
 
           # validates email
           validates :email, :presence => true, :if => :email_required?
@@ -29,11 +29,21 @@ module Devise
 
           # validates password
           validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
+
+          # don't allow use same password
+          validate :current_equal_password_validation
         end
       end
 
       def self.assert_secure_validations_api!(base) #:nodoc:
         raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
+      end
+
+      def current_equal_password_validation
+        dummy = self.class.new
+        dummy.encrypted_password = self.encrypted_password
+        dummy.password_salt = self.password_salt
+        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
       end
 
       protected
