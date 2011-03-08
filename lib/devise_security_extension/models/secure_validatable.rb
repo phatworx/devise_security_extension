@@ -40,6 +40,7 @@ module Devise
       end
 
       def current_equal_password_validation
+        return if self.new_record?
         dummy = self.class.new
         dummy.encrypted_password = self.encrypted_password
         dummy.password_salt = self.password_salt
