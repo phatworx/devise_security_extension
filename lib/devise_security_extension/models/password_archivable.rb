@@ -9,7 +9,7 @@ module Devise # :nodoc:
 
         base.class_eval do
           include InstanceMethods
-          has_many :old_passwords, :as => :password_archivable, :class_name => "OldPassword"
+          has_many :old_passwords, :as => :password_archivable, :dependent => :destroy
           before_update :archive_password
           validate :validate_password_archive
         end
