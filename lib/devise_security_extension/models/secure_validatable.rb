@@ -40,11 +40,12 @@ module Devise
       end
 
       def current_equal_password_validation
-        return if self.new_record?
-        dummy = self.class.new
-        dummy.encrypted_password = self.encrypted_password
-        dummy.password_salt = self.password_salt
-        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        unless self.encrypted_password_change.nil?
+          dummy = self.class.new
+          dummy.encrypted_password = self.encrypted_password_change.first
+          dummy.password_salt = self.password_salt_change.first
+          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        end
       end
 
       protected

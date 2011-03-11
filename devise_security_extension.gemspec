@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.3.3"
+  s.version = "0.3.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
-  s.date = %q{2011-03-08}
+  s.date = %q{2011-03-09}
   s.description = %q{a gem for extend devise for more password security}
   s.email = %q{team@phatworx.de}
   s.extra_rdoc_files = [
