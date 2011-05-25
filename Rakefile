@@ -12,13 +12,13 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "fidel-devise_security_extension"
-  gem.homepage = "http://github.com/fidel/devise_security_extension"
+  gem.name = "devise_security_extension"
+  gem.homepage = "http://github.com/phatworx/devise_security_extension"
   gem.license = "MIT"
   gem.summary = %Q{an security extension for devise}
   gem.description = %Q{a gem for extend devise for more password security}
-  gem.email = "fidelski@gmail.com"
-  gem.authors = ["Szymon Fiedler"]
+  gem.email = "team@phatworx.de"
+  gem.authors = ["Marco Scholl"]
 end
 Jeweler::RubygemsDotOrgTasks.new
 
@@ -43,7 +43,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "fidel-devise_security_extension #{version}"
+  rdoc.title = "devise_security_extension #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
