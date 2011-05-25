@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "config/locales/de.yml",
     "config/locales/en.yml",
     "devise_security_extension.gemspec",
+    "fidel-devise_security_extension.gemspec",
     "lib/devise_security_extension.rb",
     "lib/devise_security_extension/controllers/helpers.rb",
     "lib/devise_security_extension/hooks/password_expirable.rb",
