@@ -31,7 +31,7 @@ module DeviseSecurityExtension
     #
     def password_archivable
       apply_devise_schema :encrypted_password, String, :limit => 128, :null => false
-      apply_devise_schema :password_salt, String, :null => false
+      apply_devise_schema :password_salt, String
       apply_devise_schema :password_archivable_id, Integer, :null => false
       apply_devise_schema :password_archivable_type, String, :null => false
       apply_devise_schema :created_at, DateTime
