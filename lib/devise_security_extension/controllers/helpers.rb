@@ -14,12 +14,12 @@ module DeviseSecurityExtension
 
         # lookup if an password change needed
         def handle_password_change
-          Devise.mappings.keys.flatten.any? do |scope|
-            if signed_in? scope
-              if warden.session(scope)[:password_expired]
+          if not devise_controller? and not ignore_password_expire? and request.format.html?
+            Devise.mappings.keys.flatten.any? do |scope|
+              if signed_in?(scope) and warden.session(scope)[:password_expired]
                 session["#{scope}_return_to"] = request.path if request.get?
                 redirect_for_password_change scope
-                break
+                return
               end
             end
           end
@@ -35,6 +35,13 @@ module DeviseSecurityExtension
           scope       = Devise::Mapping.find_scope!(resource_or_scope)
           change_path = "#{scope}_password_expired_path"
           send(change_path)
+        end
+        
+        protected
+        
+        # allow to overwrite for some special handlings
+        def ignore_password_expire?
+          false
         end
 
       end
