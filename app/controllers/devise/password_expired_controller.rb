@@ -4,7 +4,7 @@ class Devise::PasswordExpiredController < ApplicationController
   include Devise::Controllers::InternalHelpers
 
   def show
-    if resource.need_change_password?
+    if not resource.nil? and resource.need_change_password?
       render_with_scope :show
     else
       redirect_to :root
