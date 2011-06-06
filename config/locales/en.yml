@@ -1,8 +1,8 @@
 en:
   errors:
     messages:
-      taken_in_past: Your password cannot be repeated.
+      taken_in_past: The new password was already taken in the past.
   devise:
     password_expired:
-      updated: Your new password is saved
+      updated: Your new password is saved.
       change_required: Your password is expired. Please renew your password!

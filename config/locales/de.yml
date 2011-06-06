@@ -1,8 +1,8 @@
 de:
   errors:
     messages:
-      taken_in_past: Ihr Passwort kann nicht wiederholt werden.
+      taken_in_past: Das neue Passwort wurde bereits in der Vergangenheit verwendet.
   devise:
     password_expired:
-      updated: "Das neue Passwort wurde übernommen"
+      updated: "Das neue Passwort wurde übernommen."
       change_required: Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!
