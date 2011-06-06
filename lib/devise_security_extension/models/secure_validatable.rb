@@ -11,7 +11,6 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
-
       def self.included(base)
         base.extend ClassMethods
         assert_secure_validations_api!(base)
@@ -23,8 +22,8 @@ module Devise
 
           # validates email
           validates :email, :presence => true, :if => :email_required?
-          validates :email, :email => true # use rails_email_validator
-
+          validates :email, :email => email_validation if email_validation # use rails_email_validator or similar
+          
           # validates password
           validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
 
@@ -39,10 +38,10 @@ module Devise
 
       def current_equal_password_validation
         if not self.new_record? and not self.encrypted_password_change.nil?
-          dummy = self.class.new
-          dummy.encrypted_password = self.encrypted_password_change.first
-          dummy.password_salt = self.password_salt_change.first if self.respond_to? :password_salt_change and not self.password_salt_change.nil?
-          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        dummy = self.class.new
+        dummy.encrypted_password = self.encrypted_password_change.first
+        dummy.password_salt = self.password_salt_change.first if self.respond_to? :password_salt_change and not self.password_salt_change.nil?
+        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
         end
       end
 
@@ -60,7 +59,7 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_regex, :password_length)
+        Devise::Models.config(self, :password_regex, :password_length, :email_validation)
       end
     end
   end

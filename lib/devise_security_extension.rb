@@ -22,6 +22,12 @@ module Devise # :nodoc:
   # Deny old password (true, false, count)
   mattr_accessor :deny_old_passwords
   @@deny_old_passwords = true
+
+  # enable email validation for :secure_validatable. (true, false, validation_options)
+  # dependency: need an email validator like rails_email_validator
+  mattr_accessor :email_validation
+  @@email_validation = true
+  
 end
 
 # an security extension for devise
