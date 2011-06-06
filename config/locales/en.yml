@@ -1,8 +1,8 @@
 en:
   errors:
     messages:
-      taken_in_past: The new password was already taken in the past!
-      equal_to_current_password: The new password must be different to the current password!
+      taken_in_past: was already taken in the past!
+      equal_to_current_password: must be different to the current password!
   devise:
     password_expired:
       updated: Your new password is saved.
