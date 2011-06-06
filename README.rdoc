@@ -9,6 +9,9 @@ add to Gemfile
 after bundle execute
   rails g devise_security_extension:install
 
+for :secure_validatable you need to add
+  gem 'rails_email_validator'
+
 == Configuration
 
   Devise.setup do |config|
