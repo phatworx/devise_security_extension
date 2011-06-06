@@ -19,7 +19,7 @@ module Devise
         base.class_eval do
 
           # uniq login
-          validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1]} #, :case_sensitive => case_insensitive_keys.exclude?(authentication_keys[0])
+          validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1], :case_sensitive => (case_insensitive_keys != false)}, :if => :email_changed?
 
           # validates email
           validates :email, :presence => true, :if => :email_required?
