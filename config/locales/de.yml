@@ -1,7 +1,8 @@
 de:
   errors:
     messages:
-      taken_in_past: Das neue Passwort wurde bereits in der Vergangenheit verwendet.
+      taken_in_past: Das neue Passwort wurde bereits in der Vergangenheit verwendet!
+      equal_to_current_password: Das neue Passwort darf nicht dem aktuellen Passwort entsprechen!
   devise:
     password_expired:
       updated: "Das neue Passwort wurde übernommen."
