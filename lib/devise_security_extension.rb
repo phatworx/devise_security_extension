@@ -28,6 +28,18 @@ module Devise # :nodoc:
   mattr_accessor :email_validation
   @@email_validation = true
   
+  # captcha integration for password forgotten form
+  mattr_accessor :forgotten_password_captcha
+  @@forgotten_password_captcha = false
+  
+  # captcha integration for sign up form
+  mattr_accessor :sign_up_captcha
+  @@sign_up_captcha = false
+  
+  # captcha integration for sign in form
+  mattr_accessor :sign_in_captcha
+  @@sign_in_captcha = false
+  
 end
 
 # an security extension for devise
