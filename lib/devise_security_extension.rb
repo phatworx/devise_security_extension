@@ -29,20 +29,20 @@ module Devise # :nodoc:
   @@email_validation = true
   
   # captcha integration for recover form
-  mattr_accessor :recover_captcha
-  @@recover_captcha = false
+  mattr_accessor :captcha_for_recover
+  @@captcha_for_recover = false
   
   # captcha integration for sign up form
-  mattr_accessor :sign_up_captcha
-  @@sign_up_captcha = false
+  mattr_accessor :captcha_for_sign_up
+  @@captcha_for_sign_up = false
   
   # captcha integration for sign in form
-  mattr_accessor :sign_in_captcha
-  @@sign_in_captcha = false
+  mattr_accessor :captcha_for_sign_in
+  @@captcha_for_sign_in = false
   
   # captcha integration for unlock form
-  mattr_accessor :unlock_captcha
-  @@unlock_captcha = false
+  mattr_accessor :captcha_for_unlock
+  @@captcha_for_unlock = false
   
 end
 
