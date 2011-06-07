@@ -4,10 +4,10 @@ an security extension for devise
 
 == Features
 
- * expire passwords (update password with current password)
- * strong password validation
- * save old passwords for check new passwords
- * captcha support for sign_up, sign_in, recover an unlock
+* expire passwords (update password with current password)
+* strong password validation
+* save old passwords for check new passwords
+* captcha support for sign_up, sign_in, recover an unlock
  
 == Installation
 add to Gemfile
@@ -50,21 +50,21 @@ for :secure_validatable you need to add
 
 === Installation
 
-1. add to Gemfile
-  gem 'easy_captcha'
-2. install easy_captcha
-  rails g easy_captcha:install
-3. enable captcha see configuration
+1. add to Gemfile "gem 'easy_captcha'"
+2. install easy_captcha "rails g easy_captcha:install"
+3. enable captcha - see "Configuration"
 4. add captcha source in views of devise for each controller you have activate
+
   <p><%= captcha_tag %></p>
   <p><%= text_field_tag :captcha %></p>
-5. done
+
+That's all!
 
 == Model modules
 
- * :password_expirable - activate that passwords will expire
- * :secure_validatable - better way to validate model. don't use with :validatable!!!
- * :password_archivable - save password in old_passwords for history checks
+* :password_expirable - activate that passwords will expire
+* :secure_validatable - better way to validate model. don't use with :validatable!!!
+* :password_archivable - save password in old_passwords for history checks
 
 == Schema
 
@@ -88,13 +88,13 @@ for :secure_validatable you need to add
 
 == Todo
 
- * disable inactive users after time
+* disable inactive users after time
 
 == History
- * 0.1 expire passwords
- * 0.2 strong password validation
- * 0.3 password archivable with validation
- * 0.4 captcha support for sign_up, sign_in, recover an unlock
+* 0.1 expire passwords
+* 0.2 strong password validation
+* 0.3 password archivable with validation
+* 0.4 captcha support for sign_up, sign_in, recover an unlock
 
 == Maintainers
 
