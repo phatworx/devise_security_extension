@@ -43,11 +43,15 @@ for :secure_validatable you need to add
 
 === Installation
 
-# add to Gemfile
+1. add to Gemfile
   gem 'easy_captcha'
-  
-# enable captcha see configuration
-
+2. install easy_captcha
+  rails g easy_captcha:install
+3. enable captcha see configuration
+4. add captcha source in views of devise for each controller you have activate
+  <p><%= captcha_tag %></p>
+  <p><%= text_field_tag :captcha %></p>
+5. done
 
 == Model modules
 
