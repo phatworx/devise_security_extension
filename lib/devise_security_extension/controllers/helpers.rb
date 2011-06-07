@@ -6,7 +6,23 @@ module DeviseSecurityExtension
       included do
         before_filter :handle_password_change
       end
+      
+      module ClassMethods
+        # helper for captcha
+        def init_recover_password_captcha
+          p "init"
+          p self.inspect
+          
+          include RecoverPasswordCaptcha
+        end        
+      end
 
+      module RecoverPasswordCaptcha
+        def new
+          p "Check here captcha"
+          super
+        end
+      end
 
       # controller instance methods
       module InstanceMethods

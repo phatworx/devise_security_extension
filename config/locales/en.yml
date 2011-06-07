@@ -1,9 +1,10 @@
 en:
   errors:
     messages:
-      taken_in_past: was already taken in the past!
-      equal_to_current_password: must be different to the current password!
+      taken_in_past: "was already taken in the past!"
+      equal_to_current_password: "must be different to the current password!"
   devise:
+    invalid_captcha: "The captcha input is not valid!"
     password_expired:
-      updated: Your new password is saved.
-      change_required: Your password is expired. Please renew your password!
+      updated: "Your new password is saved."
+      change_required: "Your password is expired. Please renew your password!"

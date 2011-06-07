@@ -35,6 +35,11 @@ GEM
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
+    easy_captcha (0.4.1)
+      rails (>= 3.0.0)
+      rails (>= 3.0.0)
+      rmagick
+      rmagick
     erubis (2.6.6)
       abstract (>= 1.0.0)
     git (1.2.5)
@@ -64,6 +69,8 @@ GEM
       activesupport (= 3.0.7)
       bundler (~> 1.0)
       railties (= 3.0.7)
+    rails_email_validator (0.1.4)
+      activemodel (>= 3.0.0)
     railties (3.0.7)
       actionpack (= 3.0.7)
       activesupport (= 3.0.7)
@@ -71,6 +78,7 @@ GEM
       thor (~> 0.14.4)
     rake (0.9.2)
     rcov (0.9.9)
+    rmagick (2.13.1)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -84,6 +92,8 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   devise
+  easy_captcha
   jeweler (~> 1.5.2)
   rails (~> 3.0.0)
+  rails_email_validator
   rcov

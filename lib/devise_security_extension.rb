@@ -5,7 +5,7 @@ require 'active_support/ordered_hash'
 require 'active_support/concern'
 require 'devise'
 
-module Devise # :nodoc:
+module Devise # :nodoc:  
 
   # Should the password expire (e.g 3.months)
   mattr_accessor :expire_password_after
@@ -28,9 +28,9 @@ module Devise # :nodoc:
   mattr_accessor :email_validation
   @@email_validation = true
   
-  # captcha integration for password forgotten form
-  mattr_accessor :forgotten_password_captcha
-  @@forgotten_password_captcha = false
+  # captcha integration for recover form
+  mattr_accessor :recover_captcha
+  @@recover_captcha = false
   
   # captcha integration for sign up form
   mattr_accessor :sign_up_captcha
@@ -40,22 +40,30 @@ module Devise # :nodoc:
   mattr_accessor :sign_in_captcha
   @@sign_in_captcha = false
   
+  # captcha integration for unlock form
+  mattr_accessor :unlock_captcha
+  @@unlock_captcha = false
+  
 end
 
 # an security extension for devise
 module DeviseSecurityExtension
   autoload :Schema, 'devise_security_extension/schema'
+  autoload :Patches, 'devise_security_extension/patches'
 
   module Controllers # :nodoc:
     autoload :Helpers, 'devise_security_extension/controllers/helpers'
   end
 end
 
+# modules
 Devise.add_module :password_expirable, :controller => :password_expirable, :model => 'devise_security_extension/models/password_expirable', :route => :password_expired
 Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
 Devise.add_module :password_archivable, :model => 'devise_security_extension/models/password_archivable'
 
+# requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
 require 'devise_security_extension/models/old_password'
+
