@@ -10,7 +10,7 @@ after bundle execute
   rails g devise_security_extension:install
 
 for :secure_validatable you need to add
-  gem 'rails_email_validator'
+  gem 'rails_email_validator' 
 
 == Configuration
 
@@ -26,6 +26,28 @@ for :secure_validatable you need to add
 
     # Deny old password (true, false, count)
     # config.deny_old_passwords = true
+
+    # captcha integration for recover form 
+    # config.captcha_for_recover = true
+  
+    # captcha integration for sign up form
+    # config.captcha_for_sign_up = true
+  
+    # captcha integration for sign in form
+    # config.captcha_for_sign_in = true
+  
+    # captcha integration for unlock form
+    # config.captcha_for_unlock = true
+    
+== Captcha-Support
+
+=== Installation
+
+# add to Gemfile
+  gem 'easy_captcha'
+  
+# enable captcha see configuration
+
 
 == Model modules
 
@@ -70,6 +92,7 @@ for :secure_validatable you need to add
  * 0.1 expire passwords
  * 0.2 strong password validation
  * 0.3 password archivable with validation
+ * 0.4 captcha support
 
 == Maintainers
 
