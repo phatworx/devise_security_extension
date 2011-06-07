@@ -7,6 +7,7 @@ an security extension for devise
  * expire passwords (update password with current password)
  * strong password validation
  * save old passwords for check new passwords
+ * captcha support for sign_up, sign_in, recover an unlock
  
 == Installation
 add to Gemfile
