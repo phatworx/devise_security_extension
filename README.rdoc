@@ -2,6 +2,12 @@
 
 an security extension for devise
 
+== Features
+
+ * expire passwords (update password with current password)
+ * strong password validation
+ * save old passwords for check new passwords
+ 
 == Installation
 add to Gemfile
   gem 'devise_security_extension'
@@ -79,24 +85,15 @@ for :secure_validatable you need to add
 * devise (https://github.com/plataformatec/devise)
 * Rails 3 (http://github.com/rails/rails)
 
-== Features
-
- * expire passwords (update password with current password)
- * strong password validation
- * save old passwords for check new passwords
-
 == Todo
 
- * easy_captcha for registration
- * easy_captcha for password forgotten
- * easy_captcha for unlock instructions
  * disable inactive users after time
 
 == History
  * 0.1 expire passwords
  * 0.2 strong password validation
  * 0.3 password archivable with validation
- * 0.4 captcha support
+ * 0.4 captcha support for sign_up, sign_in, recover an unlock
 
 == Maintainers
 
