@@ -85,6 +85,7 @@ That's all!
 
 * devise (https://github.com/plataformatec/devise)
 * Rails 3 (http://github.com/rails/rails)
+* recommendation: autocomplete-off (http://github.com/phatworx/autocomplete-off)
 
 == Todo
 
