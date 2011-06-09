@@ -45,6 +45,7 @@ for :secure_validatable you need to add
   
     # captcha integration for unlock form
     # config.captcha_for_unlock = true
+  end
     
 == Captcha-Support
 
