@@ -2,12 +2,22 @@
 
 an security extension for devise
 
+== Features
+
+* expire passwords (update password with current password)
+* strong password validation
+* save old passwords for check new passwords
+* captcha support for sign_up, sign_in, recover and unlock
+ 
 == Installation
 add to Gemfile
   gem 'devise_security_extension'
 
 after bundle execute
   rails g devise_security_extension:install
+
+for :secure_validatable you need to add
+  gem 'rails_email_validator' 
 
 == Configuration
 
@@ -24,11 +34,38 @@ after bundle execute
     # Deny old password (true, false, count)
     # config.deny_old_passwords = true
 
+    # captcha integration for recover form 
+    # config.captcha_for_recover = true
+  
+    # captcha integration for sign up form
+    # config.captcha_for_sign_up = true
+  
+    # captcha integration for sign in form
+    # config.captcha_for_sign_in = true
+  
+    # captcha integration for unlock form
+    # config.captcha_for_unlock = true
+  end
+    
+== Captcha-Support
+
+=== Installation
+
+1. add to Gemfile "gem 'easy_captcha'"
+2. install easy_captcha "rails g easy_captcha:install"
+3. enable captcha - see "Configuration"
+4. add captcha source in views of devise for each controller you have activate
+
+  <p><%= captcha_tag %></p>
+  <p><%= text_field_tag :captcha %></p>
+
+That's all!
+
 == Model modules
 
- * :password_expirable - activate that passwords will expire
- * :secure_validatable - better way to validate model. don't use with :validatable!!!
- * :password_archivable - save password in old_passwords for history checks
+* :password_expirable - activate that passwords will expire
+* :secure_validatable - better way to validate model. don't use with :validatable!!!
+* :password_archivable - save password in old_passwords for history checks
 
 == Schema
 
@@ -49,24 +86,17 @@ after bundle execute
 
 * devise (https://github.com/plataformatec/devise)
 * Rails 3 (http://github.com/rails/rails)
-
-== Features
-
- * expire passwords (update password with current password)
- * strong password validation
- * save old passwords for check new passwords
+* recommendation: autocomplete-off (http://github.com/phatworx/autocomplete-off)
 
 == Todo
 
- * easy_captcha for registration
- * easy_captcha for password forgotten
- * easy_captcha for unlock instructions
- * disable inactive users after time
+* disable inactive users after time
 
 == History
- * 0.1 expire passwords
- * 0.2 strong password validation
- * 0.3 password archivable with validation
+* 0.1 expire passwords
+* 0.2 strong password validation
+* 0.3 password archivable with validation
+* 0.4 captcha support for sign_up, sign_in, recover and unlock
 
 == Maintainers
 

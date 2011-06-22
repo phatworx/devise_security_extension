@@ -49,7 +49,11 @@ module Devise # :nodoc:
         def archive_password
           if self.encrypted_password_changed?
             if self.class.password_archiving_count.to_i > 0
-              self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first, :password_salt => self.password_salt_change.first if self.respond_to?(:password_salt_change)
+              if self.password_salt_change.nil?
+                self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first
+              else
+                self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first, :password_salt => self.password_salt_change.first
+              end
               self.old_passwords.order('created_at DESC').offset(self.class.password_archiving_count).destroy_all
             else
               self.old_passwords.destroy_all

@@ -15,7 +15,18 @@ module DeviseSecurityExtension
         "  # How often save old passwords in archive\n" +
         "  # config.password_archiving_count = 5\n\n" +
         "  # Deny old password (true, false, count)\n" +
-        "  # config.deny_old_passwords = true" +
+        "  # config.deny_old_passwords = true\n\n" +
+        "  # enable email validation for :secure_validatable. (true, false, validation_options)\n" +
+        "  # dependency: need an email validator like rails_email_validator\n" +
+        "  # config.email_validation = true\n\n" +
+        "  # captcha integration for recover form\n" +
+        "  # config.captcha_for_recover = true\n\n" +
+        "  # captcha integration for sign up form\n" +
+        "  # config.captcha_for_sign_up = true\n\n" +
+        "  # captcha integration for sign in form\n" +
+        "  # config.captcha_for_sign_in = true\n\n" +
+        "  # captcha integration for unlock form\n" +
+        "  # config.captcha_for_unlock = true" +
         "\n", :before => /end[ |\n|]+\Z/
       end
 
