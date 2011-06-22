@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 # Example:
-gem "rails", "~> 3.0.0"
+gem "rails", ">= 3.0.0"
 gem "devise"
 
 # Add dependencies to develop your gem here.
