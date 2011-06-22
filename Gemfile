@@ -3,7 +3,6 @@ source "http://rubygems.org"
 # Example:
 gem "rails", "~> 3.0.0"
 gem "devise"
-gem "rails_email_validator", :require => "email_validator"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
