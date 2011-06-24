@@ -94,6 +94,6 @@ DEPENDENCIES
   devise
   easy_captcha
   jeweler (~> 1.5.2)
-  rails (~> 3.0.0)
+  rails (>= 3.0.0)
   rails_email_validator
   rcov
