@@ -11,6 +11,7 @@ module Devise # :nodoc:
           include InstanceMethods
           has_many :old_passwords, :as => :password_archivable, :dependent => :destroy
           before_update :archive_password
+          after_create :set_first_old_password
           validate :validate_password_archive
         end
       end
@@ -59,6 +60,14 @@ module Devise # :nodoc:
               self.old_passwords.destroy_all
             end
           end
+        end
+      end
+
+      def set_first_old_password
+        if self.respond_to?(:password_salt) and !self.password_salt.nil?
+          self.old_passwords.create! :encrypted_password => self.encrypted_password, :password_salt => self.password_salt
+        else
+          self.old_passwords.create! :encrypted_password => self.encrypted_password
         end
       end
 
