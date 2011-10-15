@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise_security_extension}
-  s.version = "0.3.4"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl"]
-  s.date = %q{2011-03-09}
+  s.date = %q{2011-06-24}
   s.description = %q{a gem for extend devise for more password security}
   s.email = %q{team@phatworx.de}
   s.extra_rdoc_files = [
@@ -37,6 +37,8 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/models/password_expirable.rb",
     "lib/devise_security_extension/models/secure_validatable.rb",
     "lib/devise_security_extension/orm/active_record.rb",
+    "lib/devise_security_extension/patches.rb",
+    "lib/devise_security_extension/patches/controller_captcha.rb",
     "lib/devise_security_extension/rails.rb",
     "lib/devise_security_extension/routes.rb",
     "lib/devise_security_extension/schema.rb",
@@ -47,7 +49,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/phatworx/devise_security_extension}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{an security extension for devise}
   s.test_files = [
     "test/helper.rb",
@@ -58,24 +60,27 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, [">= 0"])
+      s.add_runtime_dependency(%q<rails>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<devise>, [">= 0"])
-      s.add_runtime_dependency(%q<rails_email_validator>, [">= 0"])
+      s.add_development_dependency(%q<rails_email_validator>, [">= 0"])
+      s.add_development_dependency(%q<easy_captcha>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, [">= 0"])
+      s.add_dependency(%q<rails>, [">= 3.0.0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<rails_email_validator>, [">= 0"])
+      s.add_dependency(%q<easy_captcha>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, [">= 0"])
+    s.add_dependency(%q<rails>, [">= 3.0.0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<rails_email_validator>, [">= 0"])
+    s.add_dependency(%q<easy_captcha>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])

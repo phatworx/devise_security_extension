@@ -1,5 +1,10 @@
 de:
+  errors:
+    messages:
+      taken_in_past: "wurde bereits in der Vergangenheit verwendet!"
+      equal_to_current_password: "darf nicht dem aktuellen Passwort entsprechen!"
   devise:
+    invalid_captcha: "Die Captchaeingabe ist nicht gültig!"
     password_expired:
-      updated: "Das neue Passwort wurde übernommen"
-      change_required: Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!
+      updated: "Das neue Passwort wurde übernommen."
+      change_required: "Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!"

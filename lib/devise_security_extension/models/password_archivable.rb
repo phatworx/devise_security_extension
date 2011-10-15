@@ -9,7 +9,7 @@ module Devise # :nodoc:
 
         base.class_eval do
           include InstanceMethods
-          has_many :old_passwords, :as => :password_archivable, :class_name => "OldPassword"
+          has_many :old_passwords, :as => :password_archivable, :dependent => :destroy
           before_update :archive_password
           validate :validate_password_archive
         end
@@ -35,7 +35,7 @@ module Devise # :nodoc:
             self.old_passwords.order('created_at DESC').limit(self.class.deny_old_passwords).limit(self.class.deny_old_passwords).each do |old_password|
               dummy                    = self.class.new
               dummy.encrypted_password = old_password.encrypted_password
-              dummy.password_salt      = old_password.password_salt
+              dummy.password_salt      = old_password.password_salt if dummy.respond_to?(:password_salt)
               return true if dummy.valid_password?(self.password)
             end
           end
@@ -49,7 +49,11 @@ module Devise # :nodoc:
         def archive_password
           if self.encrypted_password_changed?
             if self.class.password_archiving_count.to_i > 0
-              self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first, :password_salt => self.password_salt_change.first
+              if self.respond_to?(:password_salt_change) and not self.password_salt_change.nil?
+                self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first, :password_salt => self.password_salt_change.first
+              else
+                self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first
+              end
               self.old_passwords.order('created_at DESC').offset(self.class.password_archiving_count).destroy_all
             else
               self.old_passwords.destroy_all

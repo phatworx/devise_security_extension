@@ -4,7 +4,7 @@ class Devise::PasswordExpiredController < ApplicationController
   include Devise::Controllers::InternalHelpers
 
   def show
-    if resource.need_change_password?
+    if not resource.nil? and resource.need_change_password?
       render_with_scope :show
     else
       redirect_to :root
@@ -15,6 +15,7 @@ class Devise::PasswordExpiredController < ApplicationController
     if resource.update_with_password(params[resource_name])
       warden.session(scope)[:password_expired] = false
       set_flash_message :notice, :updated
+      sign_in scope, resource, :bypass => true
       redirect_to stored_location_for(scope) || :root
     else
       clean_up_passwords(resource)
