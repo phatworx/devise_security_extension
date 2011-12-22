@@ -1,6 +1,6 @@
 = devise_security_extension
 
-A security extension for devise, trying to meet industrial standard security demands for web applications.
+An enterprise security extension for devise, trying to meet industrial standard security demands for web applications.
 
 == Features
 
@@ -117,4 +117,3 @@ That's all!
 
 Copyright (c) 2011 Marco Scholl. See LICENSE.txt for
 further details.
-
