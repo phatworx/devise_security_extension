@@ -1,13 +1,13 @@
 = devise_security_extension
 
-an security extension for devise
+A security extension for devise, trying to meet industrial standard security demands for web applications.
 
 == Features
 
 * expire passwords (update password with current password)
 * strong password validation
-* save old passwords for check new passwords
-* captcha support for sign_up, sign_in, recover and unlock
+* save old passwords to protect users from assigning old/expired passwords again
+* captcha support for sign_up, sign_in, recover and unlock (to make automated mass creation and brute forcing of accounts harder)
  
 == Installation
 add to Gemfile
