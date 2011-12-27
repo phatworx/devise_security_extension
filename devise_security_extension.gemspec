@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "devise_security_extension"
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Marco Scholl"]
+  s.authors = ["Marco Scholl", "Alexander Dreher"]
   s.date = "2011-12-27"
-  s.description = "a gem for extend devise for more password security"
+  s.description = "An enterprise security extension for devise, trying to meet industrial standard security demands for web applications."
   s.email = "team@phatworx.de"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
-  s.summary = "an security extension for devise"
+  s.summary = "Security extension for devise"
   s.test_files = [
     "test/helper.rb",
     "test/test_devise_security_extension.rb"
