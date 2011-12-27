@@ -15,10 +15,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "devise_security_extension"
   gem.homepage = "http://github.com/phatworx/devise_security_extension"
   gem.license = "MIT"
-  gem.summary = %Q{an security extension for devise}
-  gem.description = %Q{a gem for extend devise for more password security}
+  gem.summary = %Q{Security extension for devise}
+  gem.description = %Q{An enterprise security extension for devise, trying to meet industrial standard security demands for web applications.}
   gem.email = "team@phatworx.de"
-  gem.authors = ["Marco Scholl"]
+  gem.authors = ["Marco Scholl", "Alexander Dreher"]
 end
 Jeweler::RubygemsDotOrgTasks.new
 

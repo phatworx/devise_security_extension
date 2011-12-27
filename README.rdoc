@@ -4,16 +4,20 @@ An enterprise security extension for devise, trying to meet industrial standard 
 
 == Features
 
-* expire passwords (update password with current password)
-* strong password validation
-* save old passwords to protect users from assigning old/expired passwords again
 * captcha support for sign_up, sign_in, recover and unlock (to make automated mass creation and brute forcing of accounts harder)
  
+=== Model modules
+
+* :password_expirable - passwords will expire after a configured time (and will need an update)
+* :secure_validatable - better way to validate model (email, stronger password validation). don't use with :validatable!
+* :password_archivable - save used password in an old_passwords table for history checks (don't be able to use a formerly used password)
+* :session_limitable - ensures, that there is only one session usable per account at once.
+
 == Installation
 add to Gemfile
   gem 'devise_security_extension'
 
-after bundle execute
+after bundle install
   rails g devise_security_extension:install
 
 for :secure_validatable you need to add
@@ -59,13 +63,8 @@ for :secure_validatable you need to add
   <p><%= captcha_tag %></p>
   <p><%= text_field_tag :captcha %></p>
 
-That's all!
+That's it!
 
-== Model modules
-
-* :password_expirable - activate that passwords will expire
-* :secure_validatable - better way to validate model. don't use with :validatable!!!
-* :password_archivable - save password in old_passwords for history checks
 
 == Schema
 
@@ -75,12 +74,18 @@ That's all!
     t.password_expirable
   end
 
-=== Password archive
+=== Password archivable
 
   create_table :old_passwords do |t|
     t.password_archivable
   end
   add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
+
+=== Session limitable
+
+  create_table :the_resources do |t|
+    t.session_limitable
+  end
 
 == Requirements
 
@@ -97,11 +102,13 @@ That's all!
 * 0.2 strong password validation
 * 0.3 password archivable with validation
 * 0.4 captcha support for sign_up, sign_in, recover and unlock
+* 0.5 session_limitable module
 
 == Maintainers
 
 * Team Phatworx (http://github.com/phatworx)
 * Marco Scholl (http://github.com/traxanos)
+* Alexander Dreher (http://github.com/alexdreher)
 
 == Contributing to devise_security_extension
  
@@ -115,5 +122,4 @@ That's all!
 
 == Copyright
 
-Copyright (c) 2011 Marco Scholl. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Marco Scholl. See LICENSE.txt for further details.
