@@ -36,5 +36,24 @@ module DeviseSecurityExtension
       apply_devise_schema :password_archivable_type, String, :null => false
       apply_devise_schema :created_at, DateTime
     end
+
+    # Add session_limitable columns in the resource's database table.
+    #
+    # Examples
+    #
+    # # For a new resource migration:
+    # create_table :the_resources do |t|
+    #   t.session_limitable
+    # ...
+    # end
+    #
+    # # or if the resource's table already exists, define a migration and put this in:
+    # change_table :the_resources do |t|
+    #   t.string :unique_session_id, :limit => 20
+    # end
+    #
+    def session_limitable
+      apply_devise_schema :unique_session_id, String, :limit => 20
+    end
   end
 end
