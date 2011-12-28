@@ -43,7 +43,12 @@ module Devise # :nodoc:
   # captcha integration for unlock form
   mattr_accessor :captcha_for_unlock
   @@captcha_for_unlock = false
-  
+
+  # Time period for account expiry from last_activity_at
+  mattr_accessor :expire_after
+  @@expire_after = 90.days
+  mattr_accessor :delete_expired_after
+  @@delete_expired_after = 90.days
 end
 
 # an security extension for devise
@@ -51,7 +56,7 @@ module DeviseSecurityExtension
   autoload :Schema, 'devise_security_extension/schema'
   autoload :Patches, 'devise_security_extension/patches'
 
-  module Controllers # :nodoc:
+  module Controllers
     autoload :Helpers, 'devise_security_extension/controllers/helpers'
   end
 end
@@ -61,10 +66,10 @@ Devise.add_module :password_expirable, :controller => :password_expirable, :mode
 Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
 Devise.add_module :password_archivable, :model => 'devise_security_extension/models/password_archivable'
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
+Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
 
 # requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
 require 'devise_security_extension/models/old_password'
-

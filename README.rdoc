@@ -9,12 +9,13 @@ An enterprise security extension for devise, trying to meet industrial standard 
 === Model modules
 
 * :password_expirable - passwords will expire after a configured time (and will need an update)
-* :secure_validatable - better way to validate model (email, stronger password validation). don't use with :validatable!
-* :password_archivable - save used password in an old_passwords table for history checks (don't be able to use a formerly used password)
-* :session_limitable - ensures, that there is only one session usable per account at once.
+* :secure_validatable - better way to validate a model (email, stronger password validation). Don't use with :validatable!
+* :password_archivable - save used passwords in an old_passwords table for history checks (don't be able to use a formerly used password)
+* :session_limitable - ensures, that there is only one session usable per account at once
+* :expirable - expires a user account after x days of inactivity (default 90 days)
 
 == Installation
-add to Gemfile
+Add to Gemfile
   gem 'devise_security_extension'
 
 after bundle install
@@ -49,6 +50,10 @@ for :secure_validatable you need to add
   
     # captcha integration for unlock form
     # config.captcha_for_unlock = true
+
+    # ==> Configuration for :expirable
+    # Time period for account expiry from last_activity_at
+    config.expire_after = 90.days
   end
     
 == Captcha-Support
@@ -58,7 +63,7 @@ for :secure_validatable you need to add
 1. add to Gemfile "gem 'easy_captcha'"
 2. install easy_captcha "rails g easy_captcha:install"
 3. enable captcha - see "Configuration"
-4. add captcha source in views of devise for each controller you have activate
+4. add captcha source in the devise views for each controller you have activated
 
   <p><%= captcha_tag %></p>
   <p><%= text_field_tag :captcha %></p>
@@ -87,6 +92,24 @@ That's it!
     t.session_limitable
   end
 
+=== Expirable
+Devise 2.0 style migrations on new resource:
+
+  create_table :the_resources do |t|
+    ...
+    t.datetime :last_activity_at
+    t.datetime :expired_at
+    ...
+  end
+
+Add module to existing resource with
+  
+  change_table :the_resources do |t|
+    t.datetime :last_activity_at
+    t.datetime :expired_at
+  end
+
+
 == Requirements
 
 * devise (https://github.com/plataformatec/devise)
@@ -95,7 +118,7 @@ That's it!
 
 == Todo
 
-* disable inactive users after time
+* see the github issues (feature requests)
 
 == History
 * 0.1 expire passwords
@@ -103,6 +126,7 @@ That's it!
 * 0.3 password archivable with validation
 * 0.4 captcha support for sign_up, sign_in, recover and unlock
 * 0.5 session_limitable module
+* 0.6 expirable module
 
 == Maintainers
 
