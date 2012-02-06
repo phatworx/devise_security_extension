@@ -22,6 +22,7 @@ module Devise
 
           # validates email
           validates :email, :presence => true, :if => :email_required?
+          validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
           validates :email, :email => email_validation if email_validation # use rails_email_validator or similar
           
           # validates password
