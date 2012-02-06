@@ -26,7 +26,7 @@ module Devise
         end
 
         if self.class.deny_old_passwords > 0 and not self.password.nil?
-          self.old_passwords.order('created_at DESC').limit(self.class.deny_old_passwords).limit(self.class.deny_old_passwords).each do |old_password|
+          self.old_passwords.order('created_at DESC').limit(self.class.deny_old_passwords).each do |old_password|
             dummy                    = self.class.new
             dummy.encrypted_password = old_password.encrypted_password
             dummy.password_salt      = old_password.password_salt if dummy.respond_to?(:password_salt)
