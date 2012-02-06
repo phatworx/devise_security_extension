@@ -5,17 +5,11 @@ module Devise # :nodoc:
 
     # PasswordExpirable takes care of change password after
     module PasswordExpirable
+      extend  ActiveSupport::Concern
 
-      def self.included(base) # :nodoc:
-        base.extend ClassMethods
-
-        base.class_eval do
-          before_save :update_password_changed
-          include InstanceMethods
-        end
+      included do
+        before_save :update_password_changed
       end
-
-
 
       # is an password change required?
       def need_change_password?
