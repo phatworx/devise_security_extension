@@ -13,6 +13,11 @@ module DeviseSecurityExtension::Patches
           respond_with({}, :location => new_session_path(resource_name))
         end
       end
+    
+      # for bad protected use in controller
+      define_method :auth_options do
+        { :scope => resource_name, :recall => "#{controller_path}#new" }
+      end
     end
   end
 end
