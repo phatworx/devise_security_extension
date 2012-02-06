@@ -1,6 +1,6 @@
 module DeviseSecurityExtension
-  module Controllers # :nodoc:
-    module Helpers # :nodoc:
+  module Controllers
+    module Helpers
       extend ActiveSupport::Concern
 
       included do

@@ -1,5 +1,5 @@
-module ActionDispatch::Routing # :nodoc:
-  class Mapper # :nodoc:
+module ActionDispatch::Routing
+  class Mapper
 
     protected
 

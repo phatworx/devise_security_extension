@@ -1,7 +1,7 @@
 require 'devise_security_extension/hooks/session_limitable'
 
-module Devise # :nodoc:
-  module Models # :nodoc:
+module Devise
+  module Models
     # SessionLimited ensures, that there is only one session usable per account at once.
     # If someone logs in, and some other is logging in with the same credentials,
     # the session from the first one is invalidated and not usable anymore.

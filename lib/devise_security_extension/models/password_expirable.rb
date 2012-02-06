@@ -1,7 +1,7 @@
 require 'devise_security_extension/hooks/password_expirable'
 
-module Devise # :nodoc:
-  module Models # :nodoc:
+module Devise
+  module Models
 
     # PasswordExpirable takes care of change password after
     module PasswordExpirable
@@ -48,7 +48,7 @@ module Devise # :nodoc:
       end
     end
 
-    module ClassMethods #:nodoc:
+    module ClassMethods
       ::Devise::Models.config(self, :expire_password_after)
     end
 

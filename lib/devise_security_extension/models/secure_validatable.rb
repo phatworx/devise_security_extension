@@ -11,6 +11,7 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
+
       def self.included(base)
         base.extend ClassMethods
         assert_secure_validations_api!(base)
@@ -33,7 +34,7 @@ module Devise
         end
       end
 
-      def self.assert_secure_validations_api!(base) #:nodoc:
+      def self.assert_secure_validations_api!(base)
         raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
       end
 

@@ -5,7 +5,7 @@ require 'active_support/ordered_hash'
 require 'active_support/concern'
 require 'devise'
 
-module Devise # :nodoc:  
+module Devise
 
   # Should the password expire (e.g 3.months)
   mattr_accessor :expire_password_after
@@ -43,6 +43,10 @@ module Devise # :nodoc:
   # captcha integration for unlock form
   mattr_accessor :captcha_for_unlock
   @@captcha_for_unlock = false
+  
+  # captcha integration for confirmation form
+  mattr_accessor :captcha_for_confirmation
+  @@captcha_for_confirmation = false
 
   # Time period for account expiry from last_activity_at
   mattr_accessor :expire_after
