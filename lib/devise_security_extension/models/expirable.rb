@@ -18,7 +18,7 @@ module Devise
     module Expirable
       extend ActiveSupport::Concern
 
-      module InstanceMethods
+
         # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
         def update_last_activitiy!
           self.last_activity_at = Time.now.utc
@@ -63,7 +63,7 @@ module Devise
           !self.expired? ? super : :expired
         end
 
-      end
+
 
       module ClassMethods
         ::Devise::Models.config(self, :expire_after, :delete_expired_after)

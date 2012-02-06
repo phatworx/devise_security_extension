@@ -15,7 +15,7 @@ module Devise # :nodoc:
         end
       end
 
-      module InstanceMethods # :nodoc:
+
 
         # is an password change required?
         def need_change_password?
@@ -57,7 +57,7 @@ module Devise # :nodoc:
       module ClassMethods #:nodoc:
         ::Devise::Models.config(self, :expire_password_after)
       end
-    end
+
   end
 
 end
