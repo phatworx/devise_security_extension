@@ -75,40 +75,39 @@ That's it!
 
 === Password expirable
 
-  create_table :the_resources do |t|
-    t.password_expirable
+  create_table :users do |t|
+    # other devise fields
+
+    t.datetime, :password_changed_at
   end
 
 === Password archivable
 
   create_table :old_passwords do |t|
-    t.password_archivable
+    t.string :encrypted_password, :null => false
+    t.string :password_salt
+    t.string :password_archivable_type, :null => false
+    t.integer :password_archivable_id, :null => false
+    t.datetime :created_at
   end
   add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
 
 === Session limitable
 
   create_table :the_resources do |t|
-    t.session_limitable
+    # other devise fields
+
+    t.string, :unique_session_id, :limit => 20
   end
 
 === Expirable
-Devise 2.0 style migrations on new resource:
 
   create_table :the_resources do |t|
-    ...
-    t.datetime :last_activity_at
-    t.datetime :expired_at
-    ...
-  end
+    # other devise fields
 
-Add module to existing resource with
-  
-  change_table :the_resources do |t|
     t.datetime :last_activity_at
     t.datetime :expired_at
   end
-
 
 == Requirements
 
