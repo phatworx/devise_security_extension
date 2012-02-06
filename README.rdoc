@@ -75,11 +75,12 @@ That's it!
 
 === Password expirable
 
-  create_table :users do |t|
+  create_table :the_resources do |t|
     # other devise fields
 
     t.datetime, :password_changed_at
   end
+  add_index :the_resources, :password_changed_at
 
 === Password archivable
 
@@ -108,6 +109,8 @@ That's it!
     t.datetime :last_activity_at
     t.datetime :expired_at
   end
+  add_index :the_resources, :last_activity_at
+  add_index :the_resources, :expired_at
 
 == Mongoid-Support
 
