@@ -78,7 +78,7 @@ That's it!
   create_table :the_resources do |t|
     # other devise fields
 
-    t.datetime, :password_changed_at
+    t.datetime :password_changed_at
   end
   add_index :the_resources, :password_changed_at
 
