@@ -109,7 +109,7 @@ That's it!
     t.datetime :expired_at
   end
 
-== Mongoid Support
+== Mongoid-Support
 
 if you want to use "Password archivable" with Mongoid, you must overwrite our "ActiveRecord" model.
 
