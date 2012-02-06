@@ -29,7 +29,7 @@ module DeviseSecurityExtension
         "  # config.captcha_for_unlock = true\n\n" +
         "  # ==> Configuration for :expirable\n" +
         "  # Time period for account expiry from last_activity_at\n" +
-        "  config.expire_after = 90.days\n" +
+        "  # config.expire_after = 90.days\n" +
         "", :before => /end[ |\n|]+\Z/
       end
 
