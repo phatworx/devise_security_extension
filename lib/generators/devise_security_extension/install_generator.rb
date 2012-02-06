@@ -27,6 +27,8 @@ module DeviseSecurityExtension
         "  # config.captcha_for_sign_in = true\n\n" +
         "  # captcha integration for unlock form\n" +
         "  # config.captcha_for_unlock = true\n\n" +
+        "  # captcha integration for confirmation form\n" +
+        "  # config.captcha_for_confirmation = true\n\n" +
         "  # Time period for account expiry from last_activity_at\n" +
         "  # config.expire_after = 90.days\n\n" +
         "", :before => /end[ |\n|]+\Z/
