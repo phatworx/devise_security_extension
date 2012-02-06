@@ -1,11 +1,11 @@
-class Devise::PasswordExpiredController < ApplicationController
+class Devise::PasswordExpiredController < DeviseController
   skip_before_filter :handle_password_change
   prepend_before_filter :authenticate_scope!, :only => [:show, :update]
-  include Devise::Controllers::InternalHelpers
+  include Devise::Controllers::Helpers
 
   def show
     if not resource.nil? and resource.need_change_password?
-      render_with_scope :show
+      render 'devise/password_expired/show'
     else
       redirect_to :root
     end
@@ -19,7 +19,7 @@ class Devise::PasswordExpiredController < ApplicationController
       redirect_to stored_location_for(scope) || :root
     else
       clean_up_passwords(resource)
-      render_with_scope :show
+      render 'devise/password_expired/show'
     end
   end
 
