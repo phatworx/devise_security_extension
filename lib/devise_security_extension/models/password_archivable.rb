@@ -10,7 +10,6 @@ module Devise
         before_update :archive_password
         validate :validate_password_archive
       end
-      
 
       def validate_password_archive
         self.errors.add(:password, :taken_in_past) if encrypted_password_changed? and password_archive_included?

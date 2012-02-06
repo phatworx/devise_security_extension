@@ -18,52 +18,49 @@ module Devise
     module Expirable
       extend ActiveSupport::Concern
 
+      # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
+      def update_last_activitiy!
+        self.last_activity_at = Time.now.utc
+        save(:validate => false)
+      end
 
-        # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
-        def update_last_activitiy!
-          self.last_activity_at = Time.now.utc
-          save(:validate => false)
-        end
+      # Tells if the account has expired
+      #
+      # @return [bool]
+      def expired?
+        # expired_at set (manually, via cron, etc.)
+        return self.expired_at < Time.now.utc unless self.expired_at.nil?
+        # if it is not set, check the last activity against configured expire_after time range
+        return self.last_activity_at < self.class.expire_after.ago unless self.last_activity_at.nil?
+        # if last_activity_at is nil as well, the user has to be 'fresh' and is therefore not expired
+        false
+      end
 
-        # Tells if the account has expired
-        #
-        # @return [bool]
-        def expired?
-          # expired_at set (manually, via cron, etc.)
-          return self.expired_at < Time.now.utc unless self.expired_at.nil?
-          # if it is not set, check the last activity against configured expire_after time range
-          return self.last_activity_at < self.class.expire_after.ago unless self.last_activity_at.nil?
-          # if last_activity_at is nil as well, the user has to be 'fresh' and is therefore not expired
-          false
-        end
+      # Expire an account. This is for cron jobs and manually expiring of accounts.
+      #
+      # @example 
+      #   User.expire!
+      #   User.expire! 1.week.from_now
+      # @note +expired_at+ can be in the future as well
+      def expire!(at = Time.now.utc)
+        self.expired_at = at
+        save(:validate => false)
+      end
 
-        # Expire an account. This is for cron jobs and manually expiring of accounts.
-        #
-        # @example 
-        #   User.expire!
-        #   User.expire! 1.week.from_now
-        # @note +expired_at+ can be in the future as well
-        def expire!(at = Time.now.utc)
-          self.expired_at = at
-          save(:validate => false)
-        end
+      # Overwrites active_for_authentication? from Devise::Models::Activatable
+      # for verifying whether a user is active to sign in or not. If the account
+      # is expired, it should never be allowed.
+      #
+      # @return [bool]
+      def active_for_authentication?
+        super && !self.expired?
+      end
 
-        # Overwrites active_for_authentication? from Devise::Models::Activatable
-        # for verifying whether a user is active to sign in or not. If the account
-        # is expired, it should never be allowed.
-        #
-        # @return [bool]
-        def active_for_authentication?
-          super && !self.expired?
-        end
-
-        # The message sym, if {#active_for_authentication?} returns +false+. E.g. needed 
-        # for i18n.
-        def inactive_message
-          !self.expired? ? super : :expired
-        end
-
-
+      # The message sym, if {#active_for_authentication?} returns +false+. E.g. needed 
+      # for i18n.
+      def inactive_message
+        !self.expired? ? super : :expired
+      end
 
       module ClassMethods
         ::Devise::Models.config(self, :expire_after, :delete_expired_after)
