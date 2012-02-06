@@ -98,7 +98,7 @@ That's it!
   create_table :the_resources do |t|
     # other devise fields
 
-    t.string, :unique_session_id, :limit => 20
+    t.string :unique_session_id, :limit => 20
   end
 
 === Expirable
