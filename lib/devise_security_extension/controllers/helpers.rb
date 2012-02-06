@@ -10,22 +10,18 @@ module DeviseSecurityExtension
       module ClassMethods
         # helper for captcha
         def init_recover_password_captcha
-          p "init"
-          p self.inspect
-          
           include RecoverPasswordCaptcha
         end        
       end
 
       module RecoverPasswordCaptcha
         def new
-          p "Check here captcha"
           super
         end
       end
 
       # controller instance methods
-      module InstanceMethods
+
         private
 
         # lookup if an password change needed
@@ -60,7 +56,7 @@ module DeviseSecurityExtension
           false
         end
 
-      end
+
     end
   end
 

@@ -23,7 +23,7 @@ module Devise # :nodoc:
 
         # validate is the password used in the past
         def password_archive_included?
-          unless self.class.deny_old_passwords.is_a? Fixnum
+          if not self.class.deny_old_passwords.is_a? Fixnum or not self.class.deny_old_passwords.is_a? Float
             if self.class.deny_old_passwords.is_a? TrueClass and self.class.password_archiving_count > 0
               self.class.deny_old_passwords = self.class.password_archiving_count
             else

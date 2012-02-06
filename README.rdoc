@@ -132,6 +132,7 @@ That's it!
 * Team Phatworx (http://github.com/phatworx)
 * Marco Scholl (http://github.com/traxanos)
 * Alexander Dreher (http://github.com/alexdreher)
+* Christoph Chilian (http://github.com/cc-web)
 
 == Contributing to devise_security_extension
  
