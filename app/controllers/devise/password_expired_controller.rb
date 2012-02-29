@@ -1,9 +1,9 @@
 class Devise::PasswordExpiredController < DeviseController
   skip_before_filter :handle_password_change
-  prepend_before_filter :authenticate_scope!, :only => [:show, :update]
+  prepend_before_filter :authenticate_scope!, :only => [:edit, :update]
   include Devise::Controllers::Helpers
 
-  def show
+  def edit
     if not resource.nil? and resource.need_change_password?
       render 'devise/password_expired/show'
     else
