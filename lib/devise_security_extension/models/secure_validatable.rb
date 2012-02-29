@@ -28,23 +28,11 @@ module Devise
           
           # validates password
           validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
-
-          # don't allow use same password
-          validate :current_equal_password_validation
         end
       end
 
       def self.assert_secure_validations_api!(base)
         raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
-      end
-
-      def current_equal_password_validation
-        if not self.new_record? and not self.encrypted_password_change.nil?
-          dummy = self.class.new
-          dummy.encrypted_password = self.encrypted_password_change.first
-          dummy.password_salt = self.password_salt_change.first if self.respond_to? :password_salt_change and not self.password_salt_change.nil?
-          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
-        end
       end
 
       protected
