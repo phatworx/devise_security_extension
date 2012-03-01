@@ -45,7 +45,7 @@ module DeviseSecurityExtension
         # path for change password
         def change_password_required_path_for(resource_or_scope = nil)
           scope       = Devise::Mapping.find_scope!(resource_or_scope)
-          change_path = "#{scope}_password_expired_path"
+          change_path = "edit_#{scope}_password_expired_path"
           send(change_path)
         end
         

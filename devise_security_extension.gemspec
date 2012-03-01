@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl", "Alexander Dreher"]
-  s.date = "2012-02-06"
+  s.date = "2012-03-01"
   s.description = "An enterprise security extension for devise, trying to meet industrial standard security demands for web applications."
   s.email = "team@phatworx.de"
   s.extra_rdoc_files = [
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "app/controllers/devise/password_expired_controller.rb",
-    "app/views/devise/password_expired/show.html.erb",
+    "app/views/devise/password_expired/edit.html.erb",
     "config/locales/de.yml",
     "config/locales/en.yml",
     "devise_security_extension.gemspec",
@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/phatworx/devise_security_extension"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.17"
   s.summary = "Security extension for devise"
   s.test_files = [
     "test/helper.rb",
