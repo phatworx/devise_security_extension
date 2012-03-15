@@ -6,7 +6,7 @@ module Devise
       extend  ActiveSupport::Concern
 
       included do
-        has_many :old_passwords, :as => :password_archivable, :dependent => :destroy
+        has_many :old_passwords, :as => :password_archivable, :dependent => :destroy, :order => 'id DESC'
         before_update :archive_password
         validate :validate_password_archive
       end
@@ -26,7 +26,7 @@ module Devise
         end
 
         if self.class.deny_old_passwords > 0 and not self.password.nil?
-          self.old_passwords.reverse_order(:id).limit(self.class.deny_old_passwords).each do |old_password|
+          self.old_passwords.limit(self.class.deny_old_passwords).each do |old_password|
             dummy                    = self.class.new
             dummy.encrypted_password = old_password.encrypted_password
             dummy.password_salt      = old_password.password_salt if dummy.respond_to?(:password_salt)
@@ -48,7 +48,7 @@ module Devise
             else
               self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first
             end
-            self.old_passwords.reverse_order(:id).offset(self.class.password_archiving_count).destroy_all
+            self.old_passwords.offset(self.class.password_archiving_count).destroy_all
           else
             self.old_passwords.destroy_all
           end
