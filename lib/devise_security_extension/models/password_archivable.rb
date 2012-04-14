@@ -6,7 +6,7 @@ module Devise
       extend  ActiveSupport::Concern
 
       included do
-        has_many :old_passwords, :as => :password_archivable, :dependent => :destroy
+        has_many :old_passwords, :as => :password_archivable, :dependent => :destroy, :order=>'id asc'
         before_update :archive_password
         validate :validate_password_archive
       end
