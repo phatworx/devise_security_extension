@@ -26,7 +26,9 @@ module Devise
         end
 
         if self.class.deny_old_passwords > 0 and not self.password.nil?
-          self.old_passwords.reverse_order(:id).limit(self.class.deny_old_passwords).each do |old_password|
+          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.class.deny_old_passwords)
+          old_passwords_including_cur_change << OldPassword.new(old_password_params)  # include most recent change in list, but don't save it yet!
+          old_passwords_including_cur_change.each do |old_password|
             dummy                    = self.class.new
             dummy.encrypted_password = old_password.encrypted_password
             dummy.password_salt      = old_password.password_salt if dummy.respond_to?(:password_salt)
@@ -36,6 +38,11 @@ module Devise
 
         false
       end
+      
+      def password_changed_to_same?
+        pass_change = encrypted_password_change
+        pass_change && pass_change.first == pass_change.last
+      end
 
       private
 
@@ -43,16 +50,19 @@ module Devise
       def archive_password
         if self.encrypted_password_changed?
           if self.class.password_archiving_count.to_i > 0
-            if self.respond_to?(:password_salt_change) and not self.password_salt_change.nil?
-              self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first, :password_salt => self.password_salt_change.first
-            else
-              self.old_passwords.create! :encrypted_password => self.encrypted_password_change.first
-            end
-            self.old_passwords.reverse_order(:id).offset(self.class.password_archiving_count).destroy_all
+            self.old_passwords.create! old_password_params
+            self.old_passwords.order(:id).reverse_order.offset(self.class.password_archiving_count).destroy_all
           else
             self.old_passwords.destroy_all
           end
         end
+      end
+      
+      def old_password_params
+        salt_change = if self.respond_to?(:password_salt_change) and not self.password_salt_change.nil?
+          self.password_salt_change.first
+        end
+        { :encrypted_password => self.encrypted_password_change.first, :password_salt => salt_change }
       end
 
       module ClassMethods
