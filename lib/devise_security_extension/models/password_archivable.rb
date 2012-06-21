@@ -8,7 +8,7 @@ module Devise
       included do
         has_many :old_passwords, :as => :password_archivable, :dependent => :destroy, :order=>'id asc'
         before_update :archive_password
-        validate :validate_password_archive
+        validate :validate_password_archive, :current_equal_password_validation
       end
 
       def validate_password_archive
@@ -35,6 +35,15 @@ module Devise
         end
 
         false
+      end
+
+      def current_equal_password_validation         
+        if not self.new_record? and not self.encrypted_password_change.nil?
+          dummy = self.class.new
+          dummy.encrypted_password = self.encrypted_password_change.first
+          dummy.password_salt = self.password_salt_change.first if self.respond_to? :password_salt_change and not self.password_salt_change.nil?
+          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        end
       end
 
       private
