@@ -19,7 +19,7 @@ module Devise
       extend ActiveSupport::Concern
 
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
-      def update_last_activitiy!
+      def update_last_activity!
         self.last_activity_at = Time.now.utc
         save(:validate => false)
       end
