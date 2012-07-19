@@ -4,7 +4,7 @@
 # expired_at to the past (see Devise::Models::Expirable for this)
 Warden::Manager.after_set_user do |record, warden, options|
   if record && record.respond_to?(:active_for_authentication?) && record.active_for_authentication? && 
-      warden.authenticated?(options[:scope]) && record.respond_to?(:update_last_activitiy!)
-    record.update_last_activitiy!
+      warden.authenticated?(options[:scope]) && record.respond_to?(:update_last_activity!)
+    record.update_last_activity!
   end
 end
