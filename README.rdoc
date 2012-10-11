@@ -5,7 +5,7 @@ An enterprise security extension for devise, trying to meet industrial standard 
 == Features
 
 * captcha support for sign_up, sign_in, recover and unlock (to make automated mass creation and brute forcing of accounts harder)
- 
+
 === Model modules
 
 * :password_expirable - passwords will expire after a configured time (and will need an update)
@@ -13,6 +13,7 @@ An enterprise security extension for devise, trying to meet industrial standard 
 * :password_archivable - save used passwords in an old_passwords table for history checks (don't be able to use a formerly used password)
 * :session_limitable - ensures, that there is only one session usable per account at once
 * :expirable - expires a user account after x days of inactivity (default 90 days)
+* :security_questionable - as accessible substitution for captchas (security question with captcha fallback)
 
 == Installation
 Add to Gemfile
@@ -22,7 +23,7 @@ after bundle install
   rails g devise_security_extension:install
 
 for :secure_validatable you need to add
-  gem 'rails_email_validator' 
+  gem 'rails_email_validator'
 
 == Configuration
 
@@ -39,23 +40,35 @@ for :secure_validatable you need to add
     # Deny old password (true, false, count)
     # config.deny_old_passwords = true
 
-    # captcha integration for recover form 
+    # captcha integration for recover form
     # config.captcha_for_recover = true
-  
+
     # captcha integration for sign up form
     # config.captcha_for_sign_up = true
-  
+
     # captcha integration for sign in form
     # config.captcha_for_sign_in = true
-  
+
     # captcha integration for unlock form
     # config.captcha_for_unlock = true
+
+    # security_question integration for recover form
+    # this automatically enables captchas (captcha_for_recover, as fallback)
+    # config.security_question_for_recover = false
+
+    # security_question integration for unlock form
+    # this automatically enables captchas (captcha_for_unlock, as fallback)
+    # config.security_question_for_unlock = false
+
+    # security_question integration for confirmation form
+    # this automatically enables captchas (captcha_for_confirmation, as fallback)
+    # config.security_question_for_confirmation = false
 
     # ==> Configuration for :expirable
     # Time period for account expiry from last_activity_at
     config.expire_after = 90.days
   end
-    
+
 == Captcha-Support
 
 === Installation
@@ -112,6 +125,33 @@ That's it!
   add_index :the_resources, :last_activity_at
   add_index :the_resources, :expired_at
 
+=== Security questionable
+
+  create_table :security_questions do |t|
+    t.string :locale, :null => false
+    t.string :name, :null => false
+  end
+
+  SecurityQuestion.create! locale: :de, name: 'Wie lautet der Geburstname Ihrer Mutter?'
+  SecurityQuestion.create! locale: :de, name: 'Wo sind sie geboren?'
+  SecurityQuestion.create! locale: :de, name: 'Wie lautet der Name Ihres ersten Haustieres?'
+  SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingsfilm?'
+  SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingsbuch?'
+  SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingstier?'
+  SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblings-Reiseland?'
+
+  add_column :the_resources, :security_question_id, :integer
+  add_column :the_resources, :security_question_answer, :string
+
+or
+
+  create_table :the_resources do |t|
+    # other devise fields
+
+    t.integer :security_question_id
+    t.string :security_question_answer
+  end
+
 == Requirements
 
 * devise (https://github.com/plataformatec/devise)
@@ -129,6 +169,7 @@ That's it!
 * 0.4 captcha support for sign_up, sign_in, recover and unlock
 * 0.5 session_limitable module
 * 0.6 expirable module
+* 0.7 security questionable module for recover and unlock
 
 == Maintainers
 
@@ -138,7 +179,7 @@ That's it!
 * Christoph Chilian (http://github.com/cc-web)
 
 == Contributing to devise_security_extension
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project

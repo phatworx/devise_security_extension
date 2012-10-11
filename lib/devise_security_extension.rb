@@ -27,23 +27,38 @@ module Devise
   # dependency: need an email validator like rails_email_validator
   mattr_accessor :email_validation
   @@email_validation = true
-  
+
   # captcha integration for recover form
   mattr_accessor :captcha_for_recover
   @@captcha_for_recover = false
-  
+
   # captcha integration for sign up form
   mattr_accessor :captcha_for_sign_up
   @@captcha_for_sign_up = false
-  
+
   # captcha integration for sign in form
   mattr_accessor :captcha_for_sign_in
   @@captcha_for_sign_in = false
-  
+
   # captcha integration for unlock form
   mattr_accessor :captcha_for_unlock
   @@captcha_for_unlock = false
-  
+
+  # security_question integration for recover form
+  # this automatically enables captchas (captcha_for_recover, as fallback)
+  mattr_accessor :security_question_for_recover
+  @@security_question_for_recover = false
+
+  # security_question integration for unlock form
+  # this automatically enables captchas (captcha_for_unlock, as fallback)
+  mattr_accessor :security_question_for_unlock
+  @@security_question_for_unlock = false
+
+  # security_question integration for confirmation form
+  # this automatically enables captchas (captcha_for_confirmation, as fallback)
+  mattr_accessor :security_question_for_confirmation
+  @@security_question_for_confirmation = false
+
   # captcha integration for confirmation form
   mattr_accessor :captcha_for_confirmation
   @@captcha_for_confirmation = false
@@ -71,9 +86,11 @@ Devise.add_module :secure_validatable, :model => 'devise_security_extension/mode
 Devise.add_module :password_archivable, :model => 'devise_security_extension/models/password_archivable'
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
+Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
 
 # requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
 require 'devise_security_extension/models/old_password'
+require 'devise_security_extension/models/security_question'
