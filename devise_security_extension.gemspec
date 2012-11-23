@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl", "Alexander Dreher"]
-  s.date = "2012-11-22"
+  s.date = "2012-11-23"
   s.description = "An enterprise security extension for devise, trying to meet industrial standard security demands for web applications."
   s.email = "team@phatworx.de"
   s.extra_rdoc_files = [
