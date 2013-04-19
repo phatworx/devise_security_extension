@@ -12,7 +12,7 @@ An enterprise security extension for devise, trying to meet industrial standard 
 * :secure_validatable - better way to validate a model (email, stronger password validation). Don't use with :validatable!
 * :password_archivable - save used passwords in an old_passwords table for history checks (don't be able to use a formerly used password)
 * :session_limitable - ensures, that there is only one session usable per account at once
-* :expirable - expires a user account after x days of inactivity (default 90 days)
+* :expirable - expires a user account after the defined date and/or x days of inactivity (default 90 days)
 * :security_questionable - as accessible substitution for captchas (security question with captcha fallback)
 
 == Installation
@@ -66,7 +66,10 @@ for :secure_validatable you need to add
 
     # ==> Configuration for :expirable
     # Time period for account expiry from last_activity_at
-    config.expire_after = 90.days
+    # config.expire_after = 90.days
+    #
+    # Set nil if the user doesn't expire by inactivity
+    # config.expire_after = nil
   end
 
 == Captcha-Support
