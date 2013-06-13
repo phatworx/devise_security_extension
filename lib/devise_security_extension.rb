@@ -15,6 +15,10 @@ module Devise
   mattr_accessor :password_regex
   @@password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
+  # The error message to display if password validation fails on the regex
+  mattr_accessor :password_error_message
+  @@password_error_message = ' is invalid.'
+
   # How often save old passwords in archive
   mattr_accessor :password_archiving_count
   @@password_archiving_count = 5

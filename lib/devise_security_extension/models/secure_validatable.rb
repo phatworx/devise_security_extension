@@ -27,7 +27,8 @@ module Devise
           validates :email, :email => email_validation if email_validation # use rails_email_validator or similar
           
           # validates password
-          validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
+          validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
+          validates :password, :format => {:with => password_regex, :message => password_error_message}, :if => :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -61,7 +62,7 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_regex, :password_length, :email_validation)
+        Devise::Models.config(self, :password_regex, :password_error_message, :password_length, :email_validation)
       end
     end
   end
