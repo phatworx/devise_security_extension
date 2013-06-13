@@ -12,6 +12,8 @@ module DeviseSecurityExtension
         "  # config.expire_password_after = false\n\n" +
         "  # Need 1 char of A-Z, a-z and 0-9\n" +
         "  # config.password_regex = /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])/\n\n" +
+        "  # Message to display if the password fails validation against the regex\n" +
+        "  # config.password_error_message = ' must contain at least 1 each of the following: uppercase, lowercase, numeric and symbol.'\n\n" +
         "  # How many passwords to keep in archive\n" +
         "  # config.password_archiving_count = 5\n\n" +
         "  # Deny old password (true, false, count)\n" +
