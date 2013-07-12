@@ -21,13 +21,17 @@ module Devise
           # uniq login
           validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1], :case_sensitive => (case_insensitive_keys != false)}, :if => :email_changed?
 
-          # validates email
-          validates :email, :presence => true, :if => :email_required?
-          validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+          unless self.ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
+            validates :email, :presence => true, :if => :email_required?
+            validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+
+            validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
+          end
+
+          # extra validations
           validates :email, :email => email_validation if email_validation # use rails_email_validator or similar
-          
-          # validates password
-          validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
+
+          validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
