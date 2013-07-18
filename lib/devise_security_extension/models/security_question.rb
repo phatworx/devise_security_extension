@@ -1,3 +1,3 @@
 class SecurityQuestion < ActiveRecord::Base
-  attr_accessible :locale, :name
+  attr_accessor :locale, :name
 end
