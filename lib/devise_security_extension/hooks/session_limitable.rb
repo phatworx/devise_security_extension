@@ -19,8 +19,16 @@ Warden::Manager.after_set_user :only => :fetch do |record, warden, options|
 
   if warden.authenticated?(scope) && options[:store] != false
     if record.unique_session_id != warden.session(scope)['unique_session_id'] && !env['devise.skip_session_limitable']
+      def record.skip_before_logout?; end
       warden.logout(scope)
       throw :warden, :scope => scope, :message => :session_limited
     end
+  end
+end
+
+#Remove unique_session_id on explicit logout
+Warden::Manager.before_logout do |record, warden, options|
+  if record.respond_to?(:update_unique_session_id!) && !record.respond_to?(:skip_before_logout?)
+    record.update_unique_session_id!(nil)
   end
 end
