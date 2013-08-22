@@ -28,5 +28,7 @@ end
 
 #Remove unique_session_id on explicit logout
 Warden::Manager.before_logout do |record, warden, options|
-  record.update_unique_session_id!(nil) unless record.respond_to? :skip_before_logout?
+  if record.respond_to?(:update_unique_session_id!) && !record.respond_to?(:skip_before_logout?)
+    record.update_unique_session_id!(nil)
+  end
 end
