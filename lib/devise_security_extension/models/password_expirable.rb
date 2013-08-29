@@ -13,11 +13,16 @@ module Devise
 
       # is an password change required?
       def need_change_password?
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
-          self.password_changed_at.nil? or self.password_changed_at < self.class.expire_password_after.ago
+        if expire_password_after.is_a? Fixnum or expire_password_after.is_a? Float
+          self.password_changed_at.nil? or self.password_changed_at < expire_password_after.ago
         else
           false
         end
+      end
+
+      # should be a number in the form 3.days, 3.months or 1.year
+      def expire_password_after
+        self.class.expire_password_after
       end
 
       # set a fake datetime so a password change is needed and save the record
