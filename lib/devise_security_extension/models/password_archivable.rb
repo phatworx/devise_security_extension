@@ -17,16 +17,16 @@ module Devise
 
       # validate is the password used in the past
       def password_archive_included?
-        unless self.class.deny_old_passwords.is_a? Fixnum
-          if self.class.deny_old_passwords.is_a? TrueClass and self.class.password_archiving_count > 0
-            self.class.deny_old_passwords = self.class.password_archiving_count
+        unless deny_old_passwords.is_a? Fixnum
+          if deny_old_passwords.is_a? TrueClass and password_archiving_count > 0
+            deny_old_passwords = password_archiving_count
           else
-            self.class.deny_old_passwords = 0
+            deny_old_passwords = 0
           end
         end
 
-        if self.class.deny_old_passwords > 0 and not self.password.nil?
-          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.class.deny_old_passwords)
+        if deny_old_passwords > 0 and not self.password.nil?
+          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(deny_old_passwords)
           old_passwords_including_cur_change << OldPassword.new(old_password_params)  # include most recent change in list, but don't save it yet!
           old_passwords_including_cur_change.each do |old_password|
             dummy                    = self.class.new
@@ -38,10 +38,22 @@ module Devise
 
         false
       end
-      
+
       def password_changed_to_same?
         pass_change = encrypted_password_change
         pass_change && pass_change.first == pass_change.last
+      end
+
+      def deny_old_passwords
+        self.class.deny_old_passwords
+      end
+
+      def deny_old_passwords=(count)
+        self.class.deny_old_passwords = count
+      end
+
+      def password_archiving_count
+        self.class.password_archiving_count
       end
 
       private
@@ -49,9 +61,9 @@ module Devise
       # archive the last password before save and delete all to old passwords from archive
       def archive_password
         if self.encrypted_password_changed?
-          if self.class.password_archiving_count.to_i > 0
+          if password_archiving_count.to_i > 0
             self.old_passwords.create! old_password_params
-            self.old_passwords.order(:id).reverse_order.offset(self.class.password_archiving_count).destroy_all
+            self.old_passwords.order(:id).reverse_order.offset(password_archiving_count).destroy_all
           else
             self.old_passwords.destroy_all
           end
