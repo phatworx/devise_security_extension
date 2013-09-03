@@ -17,16 +17,16 @@ module Devise
 
       # validate is the password used in the past
       def password_archive_included?
-        unless self.class.deny_old_passwords.is_a? Fixnum
-          if self.class.deny_old_passwords.is_a? TrueClass and archive_count > 0
-            self.class.deny_old_passwords = archive_count
+        unless self.deny_old_passwords.is_a? Fixnum
+          if self.deny_old_passwords.is_a? TrueClass and archive_count > 0
+            self.deny_old_passwords = archive_count
           else
-            self.class.deny_old_passwords = 0
+            self.deny_old_passwords = 0
           end
         end
 
-        if self.class.deny_old_passwords > 0 and not self.password.nil?
-          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.class.deny_old_passwords)
+        if self.deny_old_passwords > 0 and not self.password.nil?
+          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.deny_old_passwords)
           old_passwords_including_cur_change << OldPassword.new(old_password_params)  # include most recent change in list, but don't save it yet!
           old_passwords_including_cur_change.each do |old_password|
             dummy                    = self.class.new
@@ -43,11 +43,19 @@ module Devise
         pass_change && pass_change.first == pass_change.last
       end
 
-      private
+      def deny_old_passwords
+        self.class.deny_old_passwords
+      end
+
+      def deny_old_passwords=(count)
+        self.class.deny_old_passwords = count
+      end
 
       def archive_count
         self.class.password_archiving_count
       end
+
+      private
 
       # archive the last password before save and delete all to old passwords from archive
       def archive_password
