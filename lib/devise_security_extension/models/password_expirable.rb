@@ -27,7 +27,7 @@ module Devise
 
       # set a fake datetime so a password change is needed and save the record
       def need_change_password!
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
+        if expire_password_after.is_a? Fixnum or expire_password_after.is_a? Float
           need_change_password
           self.save(:validate => false)
         end
@@ -35,8 +35,8 @@ module Devise
 
       # set a fake datetime so a password change is needed
       def need_change_password
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
-          self.password_changed_at = self.class.expire_password_after.ago
+        if expire_password_after.is_a? Fixnum or expire_password_after.is_a? Float
+          self.password_changed_at = expire_password_after.ago
         end
 
         # is date not set it will set default to need set new password next login
