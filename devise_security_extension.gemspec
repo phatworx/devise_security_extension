@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "devise_security_extension"
-  s.version = "0.7.3"
+  s.version = "0.7.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marco Scholl", "Alexander Dreher"]
-  s.date = "2012-11-23"
+  s.date = "2013-09-20"
   s.description = "An enterprise security extension for devise, trying to meet industrial standard security demands for web applications."
   s.email = "team@phatworx.de"
   s.extra_rdoc_files = [
@@ -62,30 +62,30 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/phatworx/devise_security_extension"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "2.0.3"
   s.summary = "Security extension for devise"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, [">= 4.0.0"])
-      s.add_runtime_dependency(%q<devise>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<rails>, [">= 3.1.1"])
+      s.add_runtime_dependency(%q<devise>, [">= 2.0.0"])
       s.add_development_dependency(%q<rails_email_validator>, [">= 0"])
       s.add_development_dependency(%q<easy_captcha>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
     else
-      s.add_dependency(%q<rails>, [">= 4.0.0"])
-      s.add_dependency(%q<devise>, [">= 3.0.0"])
+      s.add_dependency(%q<rails>, [">= 3.1.1"])
+      s.add_dependency(%q<devise>, [">= 2.0.0"])
       s.add_dependency(%q<rails_email_validator>, [">= 0"])
       s.add_dependency(%q<easy_captcha>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     end
   else
-    s.add_dependency(%q<rails>, [">= 4.0.0"])
-    s.add_dependency(%q<devise>, [">= 3.0.0"])
+    s.add_dependency(%q<rails>, [">= 3.1.1"])
+    s.add_dependency(%q<devise>, [">= 2.0.0"])
     s.add_dependency(%q<rails_email_validator>, [">= 0"])
     s.add_dependency(%q<easy_captcha>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
