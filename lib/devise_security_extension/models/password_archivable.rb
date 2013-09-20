@@ -62,7 +62,7 @@ module Devise
         salt_change = if self.respond_to?(:password_salt_change) and not self.password_salt_change.nil?
           self.password_salt_change.first
         end
-        { :encrypted_password => self.encrypted_password_change.first, :password_salt => salt_change }
+        { :encrypted_password => self.encrypted_password_change.first, :password_salt => salt_change }.permit!
       end
 
       module ClassMethods
