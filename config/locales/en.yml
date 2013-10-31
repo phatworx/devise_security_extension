@@ -1,13 +1,13 @@
 en:
   errors:
     messages:
-      taken_in_past: "was already taken in the past!"
-      equal_to_current_password: "must be different to the current password!"
+      taken_in_past: "was used previously."
+      equal_to_current_password: "must be different than the current password."
   devise:
-    invalid_captcha: "The captcha input is not valid!"
+    invalid_captcha: "The captcha input was invalid."
     password_expired:
       updated: "Your new password is saved."
-      change_required: "Your password is expired. Please renew your password!"
+      change_required: "Your password is expired. Please renew your password."
     failure:
       session_limited: 'Your login credentials were used in another browser. Please sign in again to continue in this browser.'
       expired: 'Your account has expired due to inactivity. Please contact the site administrator.'
