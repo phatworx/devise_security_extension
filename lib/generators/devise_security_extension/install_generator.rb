@@ -30,7 +30,9 @@ module DeviseSecurityExtension
         "  # captcha integration for confirmation form\n" +
         "  # config.captcha_for_confirmation = true\n\n" +
         "  # Time period for account expiry from last_activity_at\n" +
-        "  # config.expire_after = 90.days\n\n" +
+        "  # config.expire_after = 90.days\n" +
+        "  # Set nil if the user doesn't expire by inactivity\n" +
+        "  # config.expire_after = nil\n\n" +
         "", :before => /end[ |\n|]+\Z/
       end
 
