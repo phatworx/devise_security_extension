@@ -17,17 +17,27 @@ module Devise
         assert_secure_validations_api!(base)
 
         base.class_eval do
+          # validate login in a strict way if not yet validated
+          unless has_uniqueness_validation_of_login?
+            validation_condition = "#{login_attribute}_changed?".to_sym
 
-          # uniq login
-          validates authentication_keys[0], :uniqueness => {:scope => authentication_keys[1..-1], :case_sensitive => (case_insensitive_keys != false)}, :if => :email_changed?
+            validates login_attribute, :uniqueness => {
+                                          :scope          => authentication_keys[1..-1],
+                                          :case_sensitive => !!case_insensitive_keys
+                                        },
+                                        :if => validation_condition
+          end
 
-          # validates email
-          validates :email, :presence => true, :if => :email_required?
-          validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
-          validates :email, :email => email_validation if email_validation # use rails_email_validator or similar
-          
-          # validates password
-          validates :password, :presence => true, :length => password_length, :format => password_regex, :confirmation => true, :if => :password_required?
+          unless devise_validation_enabled?
+            validates :email, :presence => true, :if => :email_required?
+            validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+
+            validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
+          end
+
+          # extra validations
+          validates :email,    :email  => email_validation if email_validation # use rails_email_validator or similar
+          validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -62,6 +72,22 @@ module Devise
 
       module ClassMethods
         Devise::Models.config(self, :password_regex, :password_length, :email_validation)
+
+      private
+        def has_uniqueness_validation_of_login?
+          validators.any? do |validator|
+            validator.kind_of?(ActiveRecord::Validations::UniquenessValidator) &&
+              validator.attributes.include?(login_attribute)
+          end
+        end
+
+        def login_attribute
+          authentication_keys[0]
+        end
+
+        def devise_validation_enabled?
+          self.ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
+        end
       end
     end
   end

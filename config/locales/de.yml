@@ -3,6 +3,7 @@ de:
     messages:
       taken_in_past: "wurde bereits in der Vergangenheit verwendet!"
       equal_to_current_password: "darf nicht dem aktuellen Passwort entsprechen!"
+      password_format: "müssen große, kleine Buchstaben und Ziffern enthalten"
   devise:
     invalid_captcha: "Die Captchaeingabe ist nicht gültig!"
     password_expired:
