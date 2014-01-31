@@ -214,6 +214,7 @@ end
 * 0.5 session_limitable module
 * 0.6 expirable module
 * 0.7 security questionable module for recover and unlock
+* 0.8 Support for Rails 4 (+ variety of patches)
 
 ## Maintainers
 
