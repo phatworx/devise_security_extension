@@ -1,5 +1,5 @@
 #require 'rails/all'
-require 'active_record/connection_adapters/abstract/schema_definitions'
+require 'active_record/connection_adapters/abstract/schema_definitions' if defined?(ActiveRecord)
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
@@ -80,6 +80,8 @@ module DeviseSecurityExtension
   end
 end
 
+orm = defined?(Mongoid) ? 'mongoid' : 'active_record'
+
 # modules
 Devise.add_module :password_expirable, :controller => :password_expirable, :model => 'devise_security_extension/models/password_expirable', :route => :password_expired
 Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
@@ -91,6 +93,6 @@ Devise.add_module :security_questionable, :model => 'devise_security_extension/m
 # requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
-require 'devise_security_extension/orm/active_record'
-require 'devise_security_extension/models/old_password'
-require 'devise_security_extension/models/security_question'
+require 'devise_security_extension/orm/active_record' if defined?(ActiveRecord)
+require "devise_security_extension/models/#{orm}/old_password"
+require "devise_security_extension/models/#{orm}/security_question"

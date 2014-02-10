@@ -36,7 +36,9 @@ module Devise
           end
 
           # extra validations
-          validates :email,    :email  => email_validation if email_validation # use rails_email_validator or similar
+          if email_validation # use rails_email_validator or similar
+            validates :email,    :email  => email_validation
+          end
           validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
 
           # don't allow use same password
@@ -76,7 +78,7 @@ module Devise
       private
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
-            validator.kind_of?(ActiveRecord::Validations::UniquenessValidator) &&
+            validator.class.name =~ /::Validations::UniquenessValidator$/) &&
               validator.attributes.include?(login_attribute)
           end
         end
