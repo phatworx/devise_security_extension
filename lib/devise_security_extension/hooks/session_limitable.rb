@@ -15,14 +15,12 @@ end
 # If so, the old account is logged out and redirected to the sign in page on the next request.
 Warden::Manager.after_set_user :only => :fetch do |record, warden, options|
   scope = options[:scope]
+  env   = warden.request.env
 
-  if warden.authenticated?(scope)
-    unless record.unique_session_id == warden.session(scope)['unique_session_id']
-      path_checker = Devise::PathChecker.new(warden.env, scope)
-      unless path_checker.signing_out?
-        warden.logout(scope)
-        throw :warden, :scope => scope, :message => :session_limited
-      end
+  if warden.authenticated?(scope) && options[:store] != false
+    if record.unique_session_id != warden.session(scope)['unique_session_id'] && !env['devise.skip_session_limitable']
+      warden.logout(scope)
+      throw :warden, :scope => scope, :message => :session_limited
     end
   end
 end
