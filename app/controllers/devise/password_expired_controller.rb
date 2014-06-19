@@ -12,7 +12,7 @@ class Devise::PasswordExpiredController < DeviseController
 
   def update
     if resource.update_with_password(params[resource_name])
-      warden.session(scope)[:password_expired] = false
+      warden.session(scope)['password_expired'] = false
       set_flash_message :notice, :updated
       sign_in scope, resource, :bypass => true
       redirect_to stored_location_for(scope) || :root
