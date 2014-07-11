@@ -1,3 +1,5 @@
+ENV['RAILS_ENV'] ||= 'test'
+
 require 'rubygems'
 require 'bundler'
 begin
@@ -13,5 +15,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'devise_security_extension'
 
-class Test::Unit::TestCase
-end
+require_relative 'dummy/config/environment'
+
+ActiveRecord::Migration.verbose = false
+ActiveRecord::Base.logger = Logger.new(nil)
+ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
