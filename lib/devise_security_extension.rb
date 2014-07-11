@@ -1,5 +1,4 @@
-#require 'rails/all'
-require 'active_record/connection_adapters/abstract/schema_definitions'
+require 'active_record'
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
