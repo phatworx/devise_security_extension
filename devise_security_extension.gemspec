@@ -92,5 +92,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
   end
+
+  s.add_development_dependency(%q<sqlite3>)
 end
 
