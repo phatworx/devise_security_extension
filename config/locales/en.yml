@@ -7,6 +7,7 @@ en:
   devise:
     invalid_captcha: "The captcha input is not valid!"
     password_expired:
+      update_failed: "Password change was unsuccessful, please correct the errors below. Note that your account may be locked if you enter your current password incorrectly multilple times."
       updated: "Your new password is saved."
       change_required: "Your password is expired. Please renew your password!"
     failure:
