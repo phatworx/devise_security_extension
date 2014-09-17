@@ -11,45 +11,88 @@ module Devise
         before_save :update_password_changed
       end
 
-      # is an password change required?
-      def need_change_password?
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
-          self.password_changed_at.nil? or self.password_changed_at < self.class.expire_password_after.ago
-        else
-          false
-        end
+      def password_needs_reset?
+        self.class.has_expire_password_configuration? &&
+          password_has_expired?
       end
 
-      # set a fake datetime so a password change is needed and save the record
-      def need_change_password!
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
-          need_change_password
-          self.save(:validate => false)
-        end
-      end
-
-      # set a fake datetime so a password change is needed
-      def need_change_password
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
+      def force_password_expire
+        if self.class.has_expire_password_configuration?
           self.password_changed_at = self.class.expire_password_after.ago
         end
 
-        # is date not set it will set default to need set new password next login
-        need_change_password if self.password_changed_at.nil?
+        return password_changed_at
+      end
 
-        self.password_changed_at
+      def force_password_expire!
+        if self.class.has_expire_password_configuration?
+          force_password_expire
+          save validate: false
+        end
+      end
+
+      def update_password(params, *options)
+        current_password = params.delete :current_password
+        password_params = params.slice :password, :password_confirmation
+        password_errors = {}
+
+        unless valid_password? current_password
+          password_errors[:current_password] = current_password.blank? ? :blank : :invalid
+          log_failed_access_attempt
+        end
+
+        if password_errors[:current_password].nil? && current_password == password_params[:password] &&
+          password_errors[:password] = :must_be_different
+        end
+
+        result = if password_errors.any?
+                   self.assign_attributes(password_params, *options)
+                   self.valid?
+                   password_errors.each { |attr, msg| self.errors.add(attr, msg) }
+                   false
+                 else
+                   update_attributes(password_params, *options)
+                 end
+
+        clean_up_passwords
+        result
       end
 
       private
+      def password_has_expired?
+        self.password_changed_at.nil? ||
+          self.password_changed_at < self.class.expire_password_after.ago
+      end
 
-        # is password changed then update password_cahanged_at
-        def update_password_changed
-          self.password_changed_at = Time.now if (self.new_record? or self.encrypted_password_changed?) and not self.password_changed_at_changed?
+      def update_password_changed
+        if (new_record? || encrypted_password_changed?) &&
+          !password_changed_at_changed?
+          self.password_changed_at = Time.now
         end
+      end
+
+      def log_failed_access_attempt
+        if respond_to?(:failed_attempts) && !access_locked?
+          reload
+          self.failed_attempts ||= 0
+          self.failed_attempts += 1
+          if attempts_exceeded?
+            lock_access! unless access_locked?
+          else
+            save(validate: false)
+          end
+        end
+      end
 
       module ClassMethods
+        def has_expire_password_configuration?
+          expire_password_after.is_a?(Fixnum) ||
+            expire_password_after.is_a?(Float)
+        end
+
         ::Devise::Models.config(self, :expire_password_after)
       end
+
     end
 
   end
