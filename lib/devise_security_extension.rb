@@ -80,11 +80,11 @@ module DeviseSecurityExtension
 end
 
 # modules
-Devise.add_module :password_expirable, :controller => :password_expirable, :model => 'devise_security_extension/models/password_expirable', :route => :password_expired
-Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
-Devise.add_module :password_archivable, :model => 'devise_security_extension/models/password_archivable'
-Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
-Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
+Devise.add_module :password_expirable,    :model => 'devise_security_extension/models/password_expirable', :route => :password_expired, :controller => :password_expirable
+Devise.add_module :secure_validatable,    :model => 'devise_security_extension/models/secure_validatable'
+Devise.add_module :password_archivable,   :model => 'devise_security_extension/models/password_archivable'
+Devise.add_module :session_limitable,     :model => 'devise_security_extension/models/session_limitable'
+Devise.add_module :expirable,             :model => 'devise_security_extension/models/expirable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
 
 # requires
