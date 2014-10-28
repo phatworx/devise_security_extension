@@ -2,12 +2,12 @@ module DeviseSecurityExtension::Patches
   module SessionsControllerCaptcha
     extend ActiveSupport::Concern
     included do
-      define_method :create do
+      define_method :create do |&block|
         if valid_captcha? params[:captcha]
           self.resource = warden.authenticate!(auth_options)
           set_flash_message(:notice, :signed_in) if is_flashing_format?
           sign_in(resource_name, resource)
-          yield resource if block_given?
+          block.call(resource) if block
           respond_with resource, :location => after_sign_in_path_for(resource)
         else
           flash[:alert] = t('devise.invalid_captcha') if is_flashing_format?
