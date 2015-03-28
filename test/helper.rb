@@ -2,6 +2,8 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require 'rubygems'
 require 'bundler'
+require 'simplecov'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
