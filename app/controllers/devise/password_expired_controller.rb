@@ -24,7 +24,7 @@ class Devise::PasswordExpiredController < DeviseController
 
   private
     def resource_params
-      params.require(resource_name).permit!
+      params.require(resource_name).permit(:current_password, :password, :password_confirmation)
     end
 
   def scope
