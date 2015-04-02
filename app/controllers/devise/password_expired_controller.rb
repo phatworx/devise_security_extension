@@ -11,7 +11,8 @@ class Devise::PasswordExpiredController < DeviseController
   end
 
   def update
-    if resource.update_with_password(resource_params)
+    resource.extend(Devise::Models::DatabaseAuthenticatablePatch)
+    if resource.update_with_password(params[resource_name])
       warden.session(scope)['password_expired'] = false
       set_flash_message :notice, :updated
       sign_in scope, resource, :bypass => true
