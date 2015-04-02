@@ -6,7 +6,7 @@
 
 Gem::Specification.new do |s|
   s.name = "devise_security_extension"
-  s.version = "0.9.0"
+  s.version = "0.9.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/models/security_questionable.rb",
     "lib/devise_security_extension/models/session_limitable.rb",
     "lib/devise_security_extension/orm/active_record.rb",
+    "lib/devise_security_extension/models/database_authenticatable_patch.rb",
     "lib/devise_security_extension/patches.rb",
     "lib/devise_security_extension/patches/confirmations_controller_captcha.rb",
     "lib/devise_security_extension/patches/confirmations_controller_security_question.rb",
