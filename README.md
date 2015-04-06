@@ -263,4 +263,4 @@ end
 
 ## Copyright
 
-Copyright (c) 2011-2012 Marco Scholl. See LICENSE.txt for further details.
+Copyright (c) 2011-2015 Marco Scholl. See LICENSE.txt for further details.
