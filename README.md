@@ -2,7 +2,7 @@
 
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
-It is composed of 6 addtional Devise modules:
+It is composed of 7 addtional Devise modules:
 
 * `:password_expirable` - passwords will expire after a configured time (and will need an update)
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
