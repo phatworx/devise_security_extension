@@ -10,7 +10,7 @@ module ActionDispatch::Routing
 
     # route for handle paranoid verification
     def devise_verification_code(mapping, controllers)
-      resource :verification_code, :only => [:show, :update], :path => mapping.path_names[:verification_code], :controller => controllers[:verification_code]
+      resource :paranoid_verification_code, :only => [:show, :update], :path => mapping.path_names[:verification_code], :controller => controllers[:paranoid_verification_code]
     end
   end
 end

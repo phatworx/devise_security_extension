@@ -57,7 +57,7 @@ module DeviseSecurityExtension
         end
 
         def redirect_for_paranoid_verification(scope)
-          redirect_to verification_code_path_for(scope), :alert => I18n.t('code_required', {:scope => 'devise.paranoid_verify'})
+          redirect_to paranoid_verification_code_path_for(scope), :alert => I18n.t('code_required', {:scope => 'devise.paranoid_verify'})
         end
 
         # path for change password
@@ -67,9 +67,9 @@ module DeviseSecurityExtension
           send(change_path)
         end
 
-        def verification_code_path_for(resource_or_scope = nil)
+        def paranoid_verification_code_path_for(resource_or_scope = nil)
           scope       = Devise::Mapping.find_scope!(resource_or_scope)
-          change_path = "#{scope}_verification_code_path"
+          change_path = "#{scope}_paranoid_verification_code_path"
           send(change_path)
         end
         

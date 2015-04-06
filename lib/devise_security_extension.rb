@@ -90,7 +90,7 @@ Devise.add_module :password_archivable, :model => 'devise_security_extension/mod
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
-Devise.add_module :paranoid_verification, :controller => :verification_code, :model => 'devise_security_extension/models/paranoid_verification', :route => :verification_code
+Devise.add_module :paranoid_verification, :controller => :paranoid_verification_code, :model => 'devise_security_extension/models/paranoid_verification', :route => :verification_code
 
 # requires
 require 'devise_security_extension/routes'
