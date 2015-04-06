@@ -62,6 +62,10 @@ module Devise
   mattr_accessor :captcha_for_confirmation
   @@captcha_for_confirmation = false
 
+  # captcha integration for confirmation form
+  mattr_accessor :verification_code_generator
+  @@verification_code_generator = -> { SecureRandom.hex[0..4] }
+
   # Time period for account expiry from last_activity_at
   mattr_accessor :expire_after
   @@expire_after = 90.days
@@ -86,6 +90,7 @@ Devise.add_module :password_archivable, :model => 'devise_security_extension/mod
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
+Devise.add_module :paranoid_verification, :controller => :verification_code, :model => 'devise_security_extension/models/paranoid_verification', :route => :verification_code
 
 # requires
 require 'devise_security_extension/routes'
@@ -94,3 +99,4 @@ require 'devise_security_extension/orm/active_record'
 require 'devise_security_extension/models/old_password'
 require 'devise_security_extension/models/security_question'
 require 'devise_security_extension/models/database_authenticatable_patch'
+require 'devise_security_extension/models/paranoid_verification'

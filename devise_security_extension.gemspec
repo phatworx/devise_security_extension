@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension.rb",
     "lib/devise_security_extension/controllers/helpers.rb",
     "lib/devise_security_extension/hooks/expirable.rb",
+    "lib/devise_security_extension/hooks/paranoid_verification.rb",
     "lib/devise_security_extension/hooks/password_expirable.rb",
     "lib/devise_security_extension/hooks/session_limitable.rb",
     "lib/devise_security_extension/models/expirable.rb",
@@ -71,6 +72,7 @@ Gem::Specification.new do |s|
     "test/dummy/db/migrate/20120508165529_create_tables.rb",
     "test/helper.rb",
     "test/test_devise_security_extension.rb",
+    "test/test_paranoid_verification.rb",
     "test/test_password_archivable.rb"
   ]
   s.homepage = "http://github.com/phatworx/devise_security_extension"

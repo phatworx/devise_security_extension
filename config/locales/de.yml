@@ -6,6 +6,8 @@ de:
       password_format: "müssen große, kleine Buchstaben und Ziffern enthalten"
   devise:
     invalid_captcha: "Die Captchaeingabe ist nicht gültig!"
+    paranoid_verify:
+      code_required: "Bitte geben Sie den Code unser Support-Team zur Verfügung gestellt"
     password_expired:
       updated: "Das neue Passwort wurde übernommen."
       change_required: "Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!"
