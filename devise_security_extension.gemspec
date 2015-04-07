@@ -70,8 +70,9 @@ Gem::Specification.new do |s|
     'test/dummy/config/environments/test.rb',
     'test/dummy/config/initializers/devise.rb',
     'test/dummy/db/migrate/20120508165529_create_tables.rb',
-    'test/helper.rb',
     'test/test_devise_security_extension.rb',
+    'test/test_helper.rb',
+    'test/test_install_generator.rb',
     'test/test_paranoid_verification.rb',
     'test/test_password_archivable.rb',
   ]

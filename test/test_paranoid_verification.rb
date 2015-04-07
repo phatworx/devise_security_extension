@@ -1,4 +1,4 @@
-require 'helper'
+require 'test_helper'
 
 class TestPasswordVerifiable < ActiveSupport::TestCase
   test 'need to paranoid verify if code present' do
