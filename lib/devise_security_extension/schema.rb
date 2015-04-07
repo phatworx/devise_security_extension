@@ -52,7 +52,7 @@ module DeviseSecurityExtension
     #   t.string :unique_session_id, :limit => 20
     # end
     #
-    def session_non_transferable
+    def session_limitable
       apply_devise_schema :unique_session_id, String, :limit => 20
     end
 

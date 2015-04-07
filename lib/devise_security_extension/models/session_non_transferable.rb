@@ -8,7 +8,7 @@ module Devise
     # access the application from different IP or User agent, session
     # wont work.
     # Be aware that this solution is brittle and some users using broadband
-    # that frequestly changes IP addresses (mobile broadband) may encountre
+    # that frequestly changes IP addresses (mobile broadband) may encounter
     # spontanious sign-outs
     module SessionNonTransferable
       extend ActiveSupport::Concern
