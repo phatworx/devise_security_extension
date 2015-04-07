@@ -247,10 +247,11 @@ end
 
 ## Maintainers
 
-* Team Phatworx (http://github.com/phatworx)
-* Alexander Dreher (http://github.com/alexdreher)
-* Christoph Chilian (http://github.com/cc-web)
-* Marco Scholl (http://github.com/traxanos)
+* Team Phatworx (https://github.com/phatworx)
+* Alexander Dreher (https://github.com/alexdreher)
+* Christoph Chilian (https://github.com/cc-web)
+* Marco Scholl (https://github.com/traxanos)
+* Thomas Powell (https://github.com/stringsn88keys)
 
 ## Contributing to devise_security_extension
 
