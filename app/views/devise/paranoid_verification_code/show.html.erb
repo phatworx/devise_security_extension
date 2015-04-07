@@ -6,5 +6,7 @@
   <p><%= f.label :paranoid_verification_code, 'Verification code' %><br />
   <%= f.text_field :paranoid_verification_code, value: '' %></p>
 
+  <p>After <strong><%= resource.paranoid_attempts_remaining %></strong> faild attemtps, code will be regenerated<p>
+
   <p><%= f.submit "Submit" %></p>
 <% end %>

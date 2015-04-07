@@ -71,6 +71,10 @@ module Devise
   @@expire_after = 90.days
   mattr_accessor :delete_expired_after
   @@delete_expired_after = 90.days
+
+  # paranoid_verification will regenerate verifacation code after faild attempt
+  mattr_accessor :paranoid_code_regenerate_after_attempt
+  @@paranoid_code_regenerate_after_attempt = 10
 end
 
 # an security extension for devise
