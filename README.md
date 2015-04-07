@@ -165,7 +165,8 @@ add_index :the_resources, :expired_at
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :paranoid_verification_code
+  t.string   :paranoid_verification_code
+  t.integer  :paranoid_verification_attempt, default: 0
   t.datetime :paranoid_verified_at
 end
 add_index :the_resources, :paranoid_verification_code
