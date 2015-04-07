@@ -173,20 +173,7 @@ add_index :the_resources, :paranoid_verification_code
 add_index :the_resources, :paranoid_verified_at
 ```
 
-for example:
-
-```
-class User < ActiveRecord::Base
-  # ...
-  def unlock_access!
-    generate_paranoid_code
-    super
-  end
-end
-```
-
-...will enforce user to fill in verification code after reseting
-password. User need to contact your support center to get this code.
+[Documentation for Paranoid Verifiable module]( https://github.com/phatworx/devise_security_extension/wiki/Paranoid-Verification)
 
 ### Security questionable
 ```ruby
