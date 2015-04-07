@@ -2,7 +2,7 @@
 
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
-It is composed of 6 addtional Devise modules:
+It is composed of 7 addtional Devise modules:
 
 * `:password_expirable` - passwords will expire after a configured time (and will need an update)
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
@@ -11,6 +11,7 @@ It is composed of 6 addtional Devise modules:
 * `:session_non_transferable` - requires session_limitable and ensures that session_id is non transferable
 * `:expirable` - expires a user account after x days of inactivity (default 90 days)
 * `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
+* `:paranoid_verification` - admin can generate verification code that user needs to fill in othervise he wont be able to use the application.
 
 Configuration and database schema for each module below.
 
@@ -185,6 +186,34 @@ add_index :the_resources, :last_activity_at
 add_index :the_resources, :expired_at
 ```
 
+### Paranoid verifiable
+```ruby
+create_table :the_resources do |t|
+  # other devise fields
+
+  t.string   :paranoid_verification_code
+  t.integer  :paranoid_verification_attempt, default: 0
+  t.datetime :paranoid_verified_at
+end
+add_index :the_resources, :paranoid_verification_code
+add_index :the_resources, :paranoid_verified_at
+```
+
+for example:
+
+```
+class User < ActiveRecord::Base
+  # ...
+  def unlock_access!
+    generate_paranoid_code
+    super
+  end
+end
+```
+
+...will enforce user to fill in verification code after reseting
+password. User need to contact your support center to get this code.
+
 ### Security questionable
 ```ruby
 create_table :security_questions do |t|
@@ -261,4 +290,4 @@ end
 
 ## Copyright
 
-Copyright (c) 2011-2012 Marco Scholl. See LICENSE.txt for further details.
+Copyright (c) 2011-2015 Marco Scholl. See LICENSE.txt for further details.

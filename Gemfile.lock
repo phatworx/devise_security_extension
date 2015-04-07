@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devise_security_extension (0.8.0)
+    devise_security_extension (0.8.4)
       devise (>= 2.0.0)
       rails (>= 3.1.1)
 

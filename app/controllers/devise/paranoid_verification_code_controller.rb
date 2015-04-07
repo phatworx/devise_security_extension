@@ -1,9 +1,9 @@
-class Devise::PasswordExpiredController < DeviseController
-  skip_before_filter :handle_password_change
+class Devise::ParanoidVerificationCodeController < DeviseController
+  skip_before_filter :handle_paranoid_verification
   prepend_before_filter :authenticate_scope!, :only => [:show, :update]
 
   def show
-    if not resource.nil? and resource.need_change_password?
+    if !resource.nil? && resource.need_paranoid_verification?
       respond_with(resource)
     else
       redirect_to :root
@@ -11,21 +11,19 @@ class Devise::PasswordExpiredController < DeviseController
   end
 
   def update
-    resource.extend(Devise::Models::DatabaseAuthenticatablePatch)
-    if resource.update_with_password(resource_params)
-      warden.session(scope)['password_expired'] = false
+    if resource.verify_code(resource_params[:paranoid_verification_code])
+      warden.session(scope)['paranoid_verify'] = false
       set_flash_message :notice, :updated
       sign_in scope, resource, :bypass => true
       redirect_to stored_location_for(scope) || :root
     else
-      clean_up_passwords(resource)
       respond_with(resource, action: :show)
     end
   end
 
   private
     def resource_params
-      params.require(resource_name).permit(:current_password, :password, :password_confirmation)
+      params.require(resource_name).permit(:paranoid_verification_code)
     end
 
   def scope
