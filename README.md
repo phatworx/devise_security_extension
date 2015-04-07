@@ -159,21 +159,6 @@ create_table :the_resources do |t|
 end
 ```
 
-If your app tests are failing after installing this extension
-it may be because extension is expecting that user record has
-values matching `user.current_user_agent == request.user_agent`
-and `user.current_sign_in_ip  == request.remote_ip`.
-
-Unless you testing integration of non-transferable session feature,
-you can disable this module with:
-
-```ruby
-# app/controllers/test_controller.spec
-before do
-  @request.env["devise.skip_session_non_transferable"] = true
-end
-```
-
 ### Expirable
 ```ruby
 create_table :the_resources do |t|
