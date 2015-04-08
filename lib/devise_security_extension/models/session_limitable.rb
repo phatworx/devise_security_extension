@@ -16,6 +16,9 @@ module Devise
         save(:validate => false)
       end
 
+      def force_single_session?
+        true
+      end
     end
   end
 end
