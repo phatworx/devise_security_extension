@@ -34,7 +34,8 @@ After you installed Devise Security Extension you need to run the generator:
 rails generate devise_security_extension:install
 ```
 
-The generator will inject the available configuration options into the **existing** Devise initializer and you MUST take a look at it (and all the Devise configuration as well). When you are done, you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
+The generator will create `config/initializers/devise_security_extension.rb`. Enable
+the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
@@ -100,7 +101,7 @@ The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_ca
 
 ### Installation
 
-1. Add EasyCaptcha to your `Gemfile` with 
+1. Add EasyCaptcha to your `Gemfile` with
 ```ruby
 gem 'easy_captcha'
 ```
@@ -212,7 +213,7 @@ end
 
 * Devise (https://github.com/plataformatec/devise)
 * Rails 3.2 onwards (http://github.com/rails/rails)
-* recommendations: 
+* recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
   * `rails_email_validator` (http://github.com/phatworx/rails_email_validator)
