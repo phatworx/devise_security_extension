@@ -2,7 +2,7 @@
 
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
-It is composed of 6 addtional Devise modules:
+It is composed of 7 addtional Devise modules:
 
 * `:password_expirable` - passwords will expire after a configured time (and will need an update)
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
@@ -10,6 +10,7 @@ It is composed of 6 addtional Devise modules:
 * `:session_limitable` - ensures, that there is only one session usable per account at once
 * `:expirable` - expires a user account after x days of inactivity (default 90 days)
 * `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
+* `:paranoid_verification` - admin can generate verification code that user needs to fill in othervise he wont be able to use the application.
 
 Configuration and database schema for each module below.
 
@@ -33,7 +34,8 @@ After you installed Devise Security Extension you need to run the generator:
 rails generate devise_security_extension:install
 ```
 
-The generator will inject the available configuration options into the **existing** Devise initializer and you MUST take a look at it (and all the Devise configuration as well). When you are done, you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
+The generator will create `config/initializers/devise_security_extension.rb`. Enable
+the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
@@ -99,7 +101,7 @@ The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_ca
 
 ### Installation
 
-1. Add EasyCaptcha to your `Gemfile` with 
+1. Add EasyCaptcha to your `Gemfile` with
 ```ruby
 gem 'easy_captcha'
 ```
@@ -159,6 +161,21 @@ add_index :the_resources, :last_activity_at
 add_index :the_resources, :expired_at
 ```
 
+### Paranoid verifiable
+```ruby
+create_table :the_resources do |t|
+  # other devise fields
+
+  t.string   :paranoid_verification_code
+  t.integer  :paranoid_verification_attempt, default: 0
+  t.datetime :paranoid_verified_at
+end
+add_index :the_resources, :paranoid_verification_code
+add_index :the_resources, :paranoid_verified_at
+```
+
+[Documentation for Paranoid Verifiable module]( https://github.com/phatworx/devise_security_extension/wiki/Paranoid-Verification)
+
 ### Security questionable
 ```ruby
 create_table :security_questions do |t|
@@ -196,7 +213,7 @@ end
 
 * Devise (https://github.com/plataformatec/devise)
 * Rails 3.2 onwards (http://github.com/rails/rails)
-* recommendations: 
+* recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
   * `rails_email_validator` (http://github.com/phatworx/rails_email_validator)
@@ -218,10 +235,11 @@ end
 
 ## Maintainers
 
-* Team Phatworx (http://github.com/phatworx)
-* Alexander Dreher (http://github.com/alexdreher)
-* Christoph Chilian (http://github.com/cc-web)
-* Marco Scholl (http://github.com/traxanos)
+* Team Phatworx (https://github.com/phatworx)
+* Alexander Dreher (https://github.com/alexdreher)
+* Christoph Chilian (https://github.com/cc-web)
+* Marco Scholl (https://github.com/traxanos)
+* Thomas Powell (https://github.com/stringsn88keys)
 
 ## Contributing to devise_security_extension
 
@@ -235,4 +253,4 @@ end
 
 ## Copyright
 
-Copyright (c) 2011-2012 Marco Scholl. See LICENSE.txt for further details.
+Copyright (c) 2011-2015 Marco Scholl. See LICENSE.txt for further details.

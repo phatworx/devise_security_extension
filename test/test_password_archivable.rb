@@ -1,4 +1,4 @@
-require 'helper'
+require 'test_helper'
 
 class TestPasswordArchivable < ActiveSupport::TestCase
   setup do
@@ -9,7 +9,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     Devise.password_archiving_count = 1
   end
 
-  test "should respect maximum attempts configuration" do
+  test 'should respect maximum attempts configuration' do
     user = User.new
     user.password = 'password1'
     user.password_confirmation = 'password1'
