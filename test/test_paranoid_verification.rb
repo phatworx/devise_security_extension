@@ -1,19 +1,18 @@
-require 'helper'
+require 'test_helper'
 
 class TestPasswordVerifiable < ActiveSupport::TestCase
-
-  test "need to paranoid verify if code present" do
+  test 'need to paranoid verify if code present' do
     user = User.new
     user.generate_paranoid_code
     assert_equal(true, user.need_paranoid_verification?)
   end
 
-  test "no need to paranoid verify if no code" do
+  test 'no need to paranoid verify if no code' do
     user = User.new
     assert_equal(false, user.need_paranoid_verification?)
   end
 
-  test "generate code" do
+  test 'generate code' do
     user = User.new
     user.generate_paranoid_code
     assert_equal(0, user.paranoid_verification_attempt)
@@ -39,7 +38,7 @@ class TestPasswordVerifiable < ActiveSupport::TestCase
     assert_equal(false, user.need_paranoid_verification?)
   end
 
-  test "when code match upon verify code, should no longer need verification" do
+  test 'when code match upon verify code, should no longer need verification' do
     user = User.new(paranoid_verification_code: 'abcde')
 
     assert_equal(true, user.need_paranoid_verification?)
@@ -53,7 +52,7 @@ class TestPasswordVerifiable < ActiveSupport::TestCase
     assert_in_delta(4, Time.now.to_i, user.paranoid_verified_at.to_i)
   end
 
-  test "when code not match upon verify code, should still need verification" do
+  test 'when code not match upon verify code, should still need verification' do
     user = User.new(paranoid_verification_code: 'abcde')
     user.verify_code('wrong')
     assert_equal(true, user.need_paranoid_verification?)

@@ -35,7 +35,8 @@ After you installed Devise Security Extension you need to run the generator:
 rails generate devise_security_extension:install
 ```
 
-The generator will inject the available configuration options into the **existing** Devise initializer and you MUST take a look at it (and all the Devise configuration as well). When you are done, you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
+The generator will create `config/initializers/devise_security_extension.rb`. Enable
+the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :session_non_transferable, :expirable
@@ -101,7 +102,7 @@ The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_ca
 
 ### Installation
 
-1. Add EasyCaptcha to your `Gemfile` with 
+1. Add EasyCaptcha to your `Gemfile` with
 ```ruby
 gem 'easy_captcha'
 ```
@@ -184,20 +185,7 @@ add_index :the_resources, :paranoid_verification_code
 add_index :the_resources, :paranoid_verified_at
 ```
 
-for example:
-
-```
-class User < ActiveRecord::Base
-  # ...
-  def unlock_access!
-    generate_paranoid_code
-    super
-  end
-end
-```
-
-...will enforce user to fill in verification code after reseting
-password. User need to contact your support center to get this code.
+[Documentation for Paranoid Verifiable module]( https://github.com/phatworx/devise_security_extension/wiki/Paranoid-Verification)
 
 ### Security questionable
 ```ruby
@@ -236,7 +224,7 @@ end
 
 * Devise (https://github.com/plataformatec/devise)
 * Rails 3.2 onwards (http://github.com/rails/rails)
-* recommendations: 
+* recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
   * `rails_email_validator` (http://github.com/phatworx/rails_email_validator)
@@ -258,10 +246,11 @@ end
 
 ## Maintainers
 
-* Team Phatworx (http://github.com/phatworx)
-* Alexander Dreher (http://github.com/alexdreher)
-* Christoph Chilian (http://github.com/cc-web)
-* Marco Scholl (http://github.com/traxanos)
+* Team Phatworx (https://github.com/phatworx)
+* Alexander Dreher (https://github.com/alexdreher)
+* Christoph Chilian (https://github.com/cc-web)
+* Marco Scholl (https://github.com/traxanos)
+* Thomas Powell (https://github.com/stringsn88keys)
 
 ## Contributing to devise_security_extension
 
