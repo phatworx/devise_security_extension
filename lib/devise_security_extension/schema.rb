@@ -55,25 +55,5 @@ module DeviseSecurityExtension
     def session_limitable
       apply_devise_schema :unique_session_id, String, :limit => 20
     end
-
-    # Add session_non_transferable columns in the resource's database table.
-    # (current_session_ip is already implemented by native Devise)
-    #
-    # Examples
-    #
-    # # For a new resource migration:
-    # create_table :the_resources do |t|
-    #   t.current_user_agent
-    # ...
-    # end
-    #
-    # # or if the resource's table already exists, define a migration and put this in:
-    # change_table :the_resources do |t|
-    #   t.string :current_user_agent
-    # end
-    #
-    def session_non_transferable
-      apply_devise_schema :current_user_agent, String
-    end
   end
 end

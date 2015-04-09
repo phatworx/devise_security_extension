@@ -13,5 +13,4 @@ de:
       change_required: "Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!"
     failure:
       session_limited: 'Ihre Anmeldedaten wurden in einem anderen Browser genutzt. Bitte melden Sie sich erneut an, um in diesem Browser fortzufahren.'
-      session_non_transferable: 'Ihre Anmeldedaten wurden in einem anderen Browser genutzt. Bitte melden Sie sich erneut an, um in diesem Browser fortzufahren.'
       expired: 'Ihr Account ist aufgrund zu langer Inaktiviät abgelaufen. Bitte kontaktieren Sie den Administrator.'
