@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "devise_security_extension/version"
+$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
+require 'devise_security_extension/version'
 
 Gem::Specification.new do |s|
   s.name = 'devise_security_extension'
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'devise', '>= 3.0.0', '< 4.0'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
   s.add_development_dependency 'sqlite3', '~> 0'
+  s.add_development_dependency 'rubocop', '~> 0'
   s.add_development_dependency 'test-unit', '~> 3.0', '>= 3.0.0'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'rails_email_validator', '~> 0'
