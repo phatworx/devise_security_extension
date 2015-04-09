@@ -13,4 +13,5 @@ en:
       change_required: "Your password is expired. Please renew your password!"
     failure:
       session_limited: 'Your login credentials were used in another browser. Please sign in again to continue in this browser.'
+      session_non_transferable: 'Your login credentials were used in another browser. Please sign in again to continue in this browser.'
       expired: 'Your account has expired due to inactivity. Please contact the site administrator.'

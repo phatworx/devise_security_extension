@@ -8,6 +8,7 @@ It is composed of 7 addtional Devise modules:
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
 * `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
 * `:session_limitable` - ensures, that there is only one session usable per account at once
+* `:session_non_transferable` - requires session_limitable and ensures that session_id is non transferable
 * `:expirable` - expires a user account after x days of inactivity (default 90 days)
 * `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
 * `:paranoid_verification` - admin can generate verification code that user needs to fill in othervise he wont be able to use the application.
@@ -38,7 +39,7 @@ The generator will create `config/initializers/devise_security_extension.rb`. En
 the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
-devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
+devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :session_non_transferable, :expirable
 ```
 
 for `:secure_validatable` you need to add
@@ -146,6 +147,16 @@ create_table :the_resources do |t|
   # other devise fields
 
   t.string :unique_session_id, :limit => 20
+end
+```
+
+### Session non transferable
+```ruby
+create_table :the_resources do |t|
+  # other devise fields
+
+  # t.string :current_sign_in_ip # is implemented by native Devise
+  t.string :current_user_agent
 end
 ```
 
