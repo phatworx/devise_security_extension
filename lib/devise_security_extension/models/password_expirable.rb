@@ -13,7 +13,7 @@ module Devise
 
       # is an password change required?
       def need_change_password?
-        if self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float
+        if (self.class.expire_password_after.is_a? Fixnum or self.class.expire_password_after.is_a? Float) && self.client_companies.pluck(:password_expirable_enabled).include?(true)
           self.password_changed_at.nil? or self.password_changed_at < self.class.expire_password_after.ago
         else
           false
