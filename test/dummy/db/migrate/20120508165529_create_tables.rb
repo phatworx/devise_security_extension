@@ -8,8 +8,12 @@ class CreateTables < ActiveRecord::Migration
       t.string :email,              null: false, default: ''
       t.string :encrypted_password, null: false, default: ''
 
+      ## :password_expirable
+      t.datetime :password_changed_at
+
       t.timestamps
     end
+    add_index :users, :password_changed_at
 
     create_table :old_passwords do |t|
       t.string :encrypted_password
