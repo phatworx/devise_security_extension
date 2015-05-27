@@ -177,6 +177,15 @@ add_index :the_resources, :paranoid_verified_at
 [Documentation for Paranoid Verifiable module]( https://github.com/phatworx/devise_security_extension/wiki/Paranoid-Verification)
 
 ### Security questionable
+
+```ruby
+# app/models/security_question.rb
+class SecurityQuestion < ActiveRecord::Base
+  validates :locale, presence: true
+  validates :name, presence: true, uniqueness: true
+end
+```
+
 ```ruby
 create_table :security_questions do |t|
   t.string :locale, :null => false
