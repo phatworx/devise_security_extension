@@ -1,7 +1,9 @@
+$:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'rubygems'
 require 'bundler'
 require 'rake/testtask'
 require 'rdoc/task'
+require 'devise_security_extension/version'
 
 desc 'Default: Run DeviseSecurityExtension unit tests'
 task default: :test
