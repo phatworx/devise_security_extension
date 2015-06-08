@@ -1,7 +1,9 @@
+$:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'rubygems'
 require 'bundler'
 require 'rake/testtask'
 require 'rdoc/task'
+require 'devise_security_extension/version'
 
 desc 'Default: Run DeviseSecurityExtension unit tests'
 task default: :test
@@ -9,7 +11,7 @@ task default: :test
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/test_*.rb'
+  t.test_files = FileList['test/*test*.rb']
   t.verbose = true
   t.warning = false
 end

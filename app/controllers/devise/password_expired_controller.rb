@@ -1,18 +1,13 @@
 class Devise::PasswordExpiredController < DeviseController
   skip_before_filter :handle_password_change
+  before_action :skip_password_change, only: [:show, :update]
   prepend_before_filter :authenticate_scope!, :only => [:show, :update]
 
   def show
-    if not resource.nil? and resource.need_change_password?
-      respond_with(resource)
-    else
-      redirect_to :root
-    end
+    respond_with(resource)
   end
 
   def update
-    redirect_to :root if not resource.nil? and resource.need_change_password?
-
     resource.extend(Devise::Models::DatabaseAuthenticatablePatch)
     if resource.update_with_password(resource_params)
       warden.session(scope)['password_expired'] = false
@@ -26,6 +21,11 @@ class Devise::PasswordExpiredController < DeviseController
   end
 
   private
+    def skip_password_change
+      return if !resource.nil? && resource.need_change_password?
+      redirect_to :root
+    end
+
     def resource_params
       params.require(resource_name).permit(:current_password, :password, :password_confirmation)
     end
