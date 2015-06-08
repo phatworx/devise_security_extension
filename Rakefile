@@ -11,7 +11,7 @@ task default: :test
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/test_*.rb'
+  t.test_files = FileList['test/*test*.rb']
   t.verbose = true
   t.warning = false
 end
