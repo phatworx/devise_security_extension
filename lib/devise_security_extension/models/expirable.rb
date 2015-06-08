@@ -20,7 +20,7 @@ module Devise
 
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
       def update_last_activity!
-        self.update_column(:last_activity_at, Time.now.utc)
+        update_column :last_activity_at, Time.now.utc
       end
 
       # Tells if the account has expired
@@ -42,8 +42,7 @@ module Devise
       #   User.expire! 1.week.from_now
       # @note +expired_at+ can be in the future as well
       def expire!(at = Time.now.utc)
-        self.expired_at = at
-        save(:validate => false)
+        update_column :expired_at, at
       end
 
       # Overwrites active_for_authentication? from Devise::Models::Activatable
