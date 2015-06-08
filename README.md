@@ -34,7 +34,7 @@ After you installed Devise Security Extension you need to run the generator:
 rails generate devise_security_extension:install
 ```
 
-The generator will create `config/initializers/devise_security_extension.rb`. Enable
+The generator adds optional configurations to `config/initializers/devise.rb`. Enable
 the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
 
 ```ruby
