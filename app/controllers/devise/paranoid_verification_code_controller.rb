@@ -22,9 +22,14 @@ class Devise::ParanoidVerificationCodeController < DeviseController
   end
 
   private
-    def resource_params
+
+  def resource_params
+    if params.respond_to?(:permit)
       params.require(resource_name).permit(:paranoid_verification_code)
+    else
+      params[scope].slice(:paranoid_verification_code)
     end
+  end
 
   def scope
     resource_name.to_sym
