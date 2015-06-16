@@ -27,7 +27,7 @@ class Devise::ParanoidVerificationCodeController < DeviseController
     if params.respond_to?(:permit)
       params.require(resource_name).permit(:paranoid_verification_code)
     else
-      params[scope]
+      params[scope].slice(:paranoid_verification_code)
     end
   end
 
