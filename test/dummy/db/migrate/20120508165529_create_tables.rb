@@ -14,7 +14,6 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :old_passwords do |t|
       t.string :encrypted_password
-      t.string :password_salt
 
       t.references :password_archivable, polymorphic: true
     end

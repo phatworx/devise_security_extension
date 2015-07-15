@@ -132,7 +132,6 @@ add_index :the_resources, :password_changed_at
 ```ruby
 create_table :old_passwords do |t|
   t.string :encrypted_password, :null => false
-  t.string :password_salt
   t.string :password_archivable_type, :null => false
   t.integer :password_archivable_id, :null => false
   t.datetime :created_at
