@@ -19,5 +19,6 @@ module RailsApp
     config.assets.enabled = true
 
     config.assets.version = '1.0'
+    config.secret_key_base = 'fuuuuuuuuuuu'
   end
 end
