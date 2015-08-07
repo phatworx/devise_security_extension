@@ -3,7 +3,7 @@ PATH
   specs:
     devise_security_extension (0.10.0)
       devise (>= 3.0.0, < 4.0)
-      rails (>= 3.2.6, < 5.0)
+      railties (>= 3.2.6, < 5.0)
 
 GEM
   remote: http://rubygems.org/
