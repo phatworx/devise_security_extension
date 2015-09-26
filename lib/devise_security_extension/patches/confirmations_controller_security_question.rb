@@ -6,7 +6,9 @@ module DeviseSecurityExtension::Patches
         # only find via email, not login
         resource = resource_class.find_or_initialize_with_error_by(:email, params[resource_name][:email], :not_found)
 
-        if valid_captcha? params[:captcha] or
+        if ((defined? verify_recaptcha) && (verify_recaptcha
+        params[:captcha])) or ((defined? valid_captcha?) && (valid_captcha?
+        params[:captcha])) or
            (resource.security_question_answer.present? and resource.security_question_answer == params[:security_question_answer])
           self.resource = resource_class.send_confirmation_instructions(params[resource_name])
 
