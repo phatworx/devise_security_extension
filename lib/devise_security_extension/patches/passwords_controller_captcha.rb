@@ -3,7 +3,9 @@ module DeviseSecurityExtension::Patches
     extend ActiveSupport::Concern
     included do
       define_method :create do
-        if valid_captcha? params[:captcha]
+        if ((defined? verify_recaptcha) && (verify_recaptcha
+        params[:captcha])) or ((defined? valid_captcha?) && (valid_captcha?
+        params[:captcha]))
           self.resource = resource_class.send_reset_password_instructions(params[resource_name])
           if successfully_sent?(resource)
             respond_with({}, :location => new_session_path(resource_name))
