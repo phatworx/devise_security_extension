@@ -27,6 +27,8 @@ module DeviseSecurityExtension
 
         # lookup if an password change needed
         def handle_password_change
+          return if warden.nil?
+
           if not devise_controller? and not ignore_password_expire? and not request.format.nil? and request.format.html?
             Devise.mappings.keys.flatten.any? do |scope|
               if signed_in?(scope) and warden.session(scope)['password_expired']
@@ -45,6 +47,8 @@ module DeviseSecurityExtension
 
         # lookup if extra (paranoid) code verification is needed
         def handle_paranoid_verification
+          return if warden.nil?
+
           if !devise_controller? && !request.format.nil? && request.format.html?
             Devise.mappings.keys.flatten.any? do |scope|
               if signed_in?(scope) && warden.session(scope)['paranoid_verify']
