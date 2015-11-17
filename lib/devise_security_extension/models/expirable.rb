@@ -79,7 +79,7 @@ module Devise
 
         # Scope method to collect all expired users since +time+ ago
         def expired_for(time = delete_expired_after)
-          where('expired_at < ?', time.ago)
+          where('expired_at < ?', time.seconds.ago)
         end
 
         # Sample method for daily cron to delete all expired entries after a 
