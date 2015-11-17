@@ -14,7 +14,7 @@ module Devise
       # is an password change required?
       def need_change_password?
         if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
-          self.password_changed_at.nil? or self.password_changed_at < self.expire_password_after.ago
+          self.password_changed_at.nil? or self.password_changed_at < self.expire_password_after.seconds.ago
         else
           false
         end
@@ -31,7 +31,7 @@ module Devise
       # set a fake datetime so a password change is needed
       def need_change_password
         if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
-          self.password_changed_at = self.expire_password_after.ago
+          self.password_changed_at = self.expire_password_after.seconds.ago
         end
 
         # is date not set it will set default to need set new password next login
