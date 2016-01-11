@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestPasswordVerifiable < ActiveSupport::TestCase
+class TestParanoidVerification < ActiveSupport::TestCase
   test 'need to paranoid verify if code present' do
     user = User.new
     user.generate_paranoid_code
