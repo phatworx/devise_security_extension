@@ -12,6 +12,12 @@ class CreateTables < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :secure_users do |t|
+      t.string :email
+      t.string :encrypted_password, null: false, default: ''
+      t.timestamps
+    end
+
     create_table :old_passwords do |t|
       t.string :encrypted_password
 
@@ -21,6 +27,7 @@ class CreateTables < ActiveRecord::Migration
 
   def self.down
     drop_table :users
+    drop_table :secure_users
     drop_table :old_passwords
   end
 end

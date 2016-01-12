@@ -17,6 +17,8 @@ module Devise
         assert_secure_validations_api!(base)
 
         base.class_eval do
+          already_validated_email = false
+
           # validate login in a strict way if not yet validated
           unless has_uniqueness_validation_of_login?
             validation_condition = "#{login_attribute}_changed?".to_sym
@@ -26,11 +28,15 @@ module Devise
                                           :case_sensitive => !!case_insensitive_keys
                                         },
                                         :if => validation_condition
+
+            already_validated_email = login_attribute.to_s == 'email'
           end
 
           unless devise_validation_enabled?
             validates :email, :presence => true, :if => :email_required?
-            validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+            unless already_validated_email
+              validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+            end
 
             validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
           end
