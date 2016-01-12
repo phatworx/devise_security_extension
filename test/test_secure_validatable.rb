@@ -70,4 +70,16 @@ class TestSecureValidatable < ActiveSupport::TestCase
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ActiveRecord::RecordInvalid) { user.save! }
   end
+
+  test 'duplicate email validation message is added only once' do
+    options = {
+      email: 'test@example.org',
+      password: 'Test12345',
+      password_confirmation: 'Test12345',
+    }
+    SecureUser.create!(options)
+    user = SecureUser.new(options)
+    refute user.valid?
+    assert_equal ['Email has already been taken'], user.errors.full_messages
+  end
 end
