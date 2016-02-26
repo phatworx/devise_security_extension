@@ -9,15 +9,38 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     Devise.password_archiving_count = 1
   end
 
-  test 'should respect maximum attempts configuration' do
-    user = User.new
-    user.password = 'password1'
-    user.password_confirmation = 'password1'
+  def set_password(user, password)
+    user.password = password
+    user.password_confirmation = password
     user.save!
+  end
 
-    user.password = 'password1'
-    user.password_confirmation = 'password1'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+  test 'cannot use same password' do
+    user = User.create password: 'password1', password_confirmation: 'password1'
+
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+  end
+
+  test 'cannot use archived passwords' do
+    assert_equal 2, Devise.password_archiving_count
+
+    user = User.create password: 'password1', password_confirmation: 'password1'
+    assert_equal 0, OldPassword.count
+
+    set_password(user,  'password2')
+    assert_equal 1, OldPassword.count
+
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+
+    set_password(user,  'password3')
+    assert_equal 2, OldPassword.count
+
+    # rotate first password out of archive
+    assert set_password(user,  'password4')
+
+    # archive count was 2, so first password should work again
+    assert set_password(user,  'password1')
+    assert set_password(user,  'password2')
   end
 
   test 'the option should be dynamic during runtime' do
@@ -27,21 +50,12 @@ class TestPasswordArchivable < ActiveSupport::TestCase
       end
     end
 
-    user = User.new
-    user.password = 'password1'
-    user.password_confirmation = 'password1'
-    user.save!
+    user = User.create password: 'password1', password_confirmation: 'password1'
 
-    user.password = 'password2'
-    user.password_confirmation = 'password2'
-    user.save!
+    assert set_password(user,  'password2')
 
-    user.password = 'password2'
-    user.password_confirmation = 'password2'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password2') }
 
-    user.password = 'password1'
-    user.password_confirmation = 'password1'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
   end
 end
