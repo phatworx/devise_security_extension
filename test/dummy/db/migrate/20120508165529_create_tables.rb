@@ -9,7 +9,7 @@ class CreateTables < ActiveRecord::Migration
       t.string :encrypted_password, null: false, default: ''
 
       t.datetime :password_changed_at
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :old_passwords do |t|

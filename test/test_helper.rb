@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'dummy/config/environment'
-require 'test/unit'
+require 'minitest/autorun'
 require 'rails/test_help'
 require 'devise_security_extension'
 
