@@ -6,7 +6,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   teardown do
-    Devise.expire_password_after = nil
+    Devise.expire_password_after = 90.days
   end
 
   test 'password expires' do
