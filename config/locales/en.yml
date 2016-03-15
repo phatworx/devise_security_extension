@@ -6,6 +6,7 @@ en:
       password_format: "must contain big, small letters and digits"
   devise:
     invalid_captcha: "The captcha input was invalid."
+    invalid_security_question: "The security question answer was invalid."
     paranoid_verify:
       code_required: "Please enter the code our support team provided"
     password_expired:
