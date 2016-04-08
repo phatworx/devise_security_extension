@@ -22,6 +22,12 @@ module Devise
   mattr_accessor :deny_old_passwords
   @@deny_old_passwords = true
 
+  # Deny all password not older than X days
+  # password_archiving_count should be set to a larger value than deny_old_passwords
+  # default to false
+  mattr_accessor :deny_newer_password_than
+  @@deny_newer_password_than = false
+
   # enable email validation for :secure_validatable. (true, false, validation_options)
   # dependency: need an email validator like rails_email_validator
   mattr_accessor :email_validation

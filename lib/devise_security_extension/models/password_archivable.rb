@@ -24,9 +24,9 @@ module Devise
           end
         end
 
-        if self.class.deny_old_passwords > 0 and not self.password.nil?
-          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.class.deny_old_passwords).to_a
-          old_passwords_including_cur_change << OldPassword.new(old_password_params)  # include most recent change in list, but don't save it yet!
+        if deny_old_passwords > 0 and !password.nil?
+          old_passwords_including_cur_change = old_passwords_to_be_denied
+          old_passwords_including_cur_change << OldPassword.new(old_password_params) # include most recent change in list, but don't save it yet!
           old_passwords_including_cur_change.each do |old_password|
             dummy                    = self.class.new
             dummy.encrypted_password = old_password.encrypted_password
@@ -54,7 +54,19 @@ module Devise
         self.class.password_archiving_count
       end
 
+      def deny_newer_password_than
+        self.class.deny_newer_password_than
+      end
+
       private
+
+      def old_passwords_to_be_denied
+        if deny_newer_password_than.is_a? Fixnum
+          rel = old_passwords.where("created_at > ?", Time.now - deny_newer_password_than)
+          return rel.all if rel.count > deny_old_passwords
+        end
+        old_passwords.order(:id).reverse_order.limit(deny_old_passwords)
+      end
 
       # archive the last password before save and delete all to old passwords from archive
       def archive_password
@@ -73,7 +85,10 @@ module Devise
       end
 
       module ClassMethods
-        ::Devise::Models.config(self, :password_archiving_count, :deny_old_passwords)
+        ::Devise::Models.config(self,
+          :password_archiving_count,
+          :deny_old_passwords,
+          :deny_newer_password_than)
       end
     end
   end
