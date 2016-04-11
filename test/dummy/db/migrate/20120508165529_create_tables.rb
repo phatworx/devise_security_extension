@@ -16,6 +16,7 @@ class CreateTables < ActiveRecord::Migration
       t.string :encrypted_password
 
       t.references :password_archivable, polymorphic: true
+      t.datetime :created_at
     end
   end
 

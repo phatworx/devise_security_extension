@@ -68,9 +68,8 @@ Devise.setup do |config|
   # Deny old password (true, false, count)
   # config.deny_old_passwords = true
 
-  # Deny all password not older than X days
-  # password_archiving_count should be set to a larger value than deny_old_passwords
-  # default to false
+  # Deny all password more recent than X days
+  # default to nil when unused
   # config.deny_newer_password_than = 90.days
 
   # captcha integration for recover form
