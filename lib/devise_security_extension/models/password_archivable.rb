@@ -16,13 +16,6 @@ module Devise
 
       # validate is the password used in the past
       def password_archive_included?
-        unless deny_old_passwords.is_a? Fixnum
-          if deny_old_passwords.is_a? TrueClass and archive_count > 0
-            self.deny_old_passwords = archive_count
-          else
-            self.deny_old_passwords = 0
-          end
-        end
 
         if deny_old_passwords > 0 and !password.nil?
           old_passwords_including_cur_change = old_passwords_to_be_denied.all
@@ -43,11 +36,14 @@ module Devise
       end
 
       def deny_old_passwords
-        self.class.deny_old_passwords
-      end
-
-      def deny_old_passwords=(count)
-        self.class.deny_old_passwords = count
+        case self.class.deny_old_passwords
+        when Fixnum
+          self.class.deny_old_passwords
+        when TrueClass
+          self.class.deny_old_passwords = archive_count
+        else
+          self.class.deny_old_passwords = 0
+        end
       end
 
       def archive_count
