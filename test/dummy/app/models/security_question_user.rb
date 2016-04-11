@@ -1,5 +1,6 @@
-class User < ActiveRecord::Base
+class SecurityQuestionUser < ActiveRecord::Base
+  self.table_name = "users"
   devise :database_authenticatable, :password_archivable, :lockable,
          :paranoid_verification, :password_expirable,
-         :security_questionable
+         :security_questionable 
 end

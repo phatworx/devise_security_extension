@@ -14,7 +14,7 @@ module Devise
   mattr_accessor :password_regex
   @@password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
-  # How often save old passwords in archive
+  # Number of old passwords in archive
   mattr_accessor :password_archiving_count
   @@password_archiving_count = 5
 
@@ -102,6 +102,5 @@ require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
 require 'devise_security_extension/models/old_password'
-require 'devise_security_extension/models/security_question'
 require 'devise_security_extension/models/database_authenticatable_patch'
 require 'devise_security_extension/models/paranoid_verification'
