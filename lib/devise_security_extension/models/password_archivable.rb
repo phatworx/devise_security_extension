@@ -6,7 +6,7 @@ module Devise
 
       included do
         has_many :old_passwords, as: :password_archivable, dependent: :destroy
-        before_update :archive_password
+        before_update :archive_password, if: :encrypted_password_changed?
         validate :validate_password_archive
       end
 
@@ -16,7 +16,6 @@ module Devise
 
       # validate is the password used in the past
       def password_archive_included?
-
         if deny_old_passwords > 0 and !password.nil?
           old_passwords_including_cur_change = old_passwords_to_be_denied.all
           old_passwords_including_cur_change << OldPassword.new(old_password_params) # include most recent change in list, but don't save it yet!
@@ -69,18 +68,12 @@ module Devise
 
       # archive the last password before save and delete all too old passwords from archive
       def archive_password
-        if encrypted_password_changed?
-          if archive_count.to_i > 0 or deny_newer_password_than > 0
-            old_passwords.create! old_password_params
-            count = if deny_newer_password_than > 0
-              [old_passwords_to_be_denied.count, archive_count].max
-            else
-              archive_count
-            end
-            old_passwords.order(:id).reverse_order.offset(count).destroy_all
-          else
-            old_passwords.destroy_all
-          end
+        if archive_count.to_i > 0 or deny_newer_password_than > 0
+          old_passwords.create! old_password_params
+          current_count = deny_newer_password_than > 0 ? old_passwords_to_be_denied.count : 0
+          old_passwords.order(:id).reverse_order.offset([current_count, archive_count].max).destroy_all
+        else
+          old_passwords.destroy_all
         end
       end
 
