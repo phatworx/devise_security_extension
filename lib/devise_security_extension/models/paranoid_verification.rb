@@ -17,7 +17,7 @@ module Devise
           generate_paranoid_code
         elsif code == paranoid_verification_code
           attempt = 0
-          update_without_password paranoid_verification_code: nil, paranoid_verified_at: Time.now, paranoid_verification_attempt: attempt
+          update_without_password paranoid_verification_code: nil, paranoid_verified_at: Time.zone.now, paranoid_verification_attempt: attempt
         else
           update_without_password paranoid_verification_attempt: attempt
         end

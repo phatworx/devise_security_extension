@@ -20,7 +20,7 @@ module Devise
 
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
       def update_last_activity!
-        self.update_column(:last_activity_at, Time.now.utc)
+        self.update_column(:last_activity_at, Time.zone.now)
       end
 
       # Tells if the account has expired
@@ -28,7 +28,7 @@ module Devise
       # @return [bool]
       def expired?
         # expired_at set (manually, via cron, etc.)
-        return self.expired_at < Time.now.utc unless self.expired_at.nil?
+        return self.expired_at < Time.zone.now unless self.expired_at.nil?
         # if it is not set, check the last activity against configured expire_after time range
         return self.last_activity_at < self.class.expire_after.ago unless self.last_activity_at.nil?
         # if last_activity_at is nil as well, the user has to be 'fresh' and is therefore not expired
@@ -41,7 +41,7 @@ module Devise
       #   User.expire!
       #   User.expire! 1.week.from_now
       # @note +expired_at+ can be in the future as well
-      def expire!(at = Time.now.utc)
+      def expire!(at = Time.zone.now)
         self.expired_at = at
         save(:validate => false)
       end

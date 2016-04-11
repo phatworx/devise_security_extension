@@ -58,7 +58,7 @@ module Devise
 
       def old_passwords_to_be_denied
         if deny_newer_password_than > 0
-          rel = old_passwords.where("created_at > ?", Time.now - deny_newer_password_than)
+          rel = old_passwords.where("created_at > ?", Time.zone.now - deny_newer_password_than)
           # if there are more archived passwords within the configured timeframe
           # than what you would otherwise deny take that list.
           return rel if rel.count > deny_old_passwords
@@ -85,7 +85,7 @@ module Devise
       end
 
       def old_password_params
-        { encrypted_password: encrypted_password_change.first, created_at: Time.now }
+        { encrypted_password: encrypted_password_change.first, created_at: Time.zone.now }
       end
 
       module ClassMethods

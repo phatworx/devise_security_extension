@@ -13,7 +13,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     user = User.create password: 'password1', password_confirmation: 'password1'
     refute user.need_change_password?
 
-    user.update(password_changed_at: Time.now.ago(3.month))
+    user.update(password_changed_at: Time.zone.now.ago(3.month))
     assert user.need_change_password?
   end
 
@@ -24,9 +24,9 @@ class TestPasswordArchivable < ActiveSupport::TestCase
         4.month
       end
     end
-    user.password_changed_at = Time.now.ago(3.month)
+    user.password_changed_at = Time.zone.now.ago(3.month)
     refute user.need_change_password?
-    user.password_changed_at = Time.now.ago(5.month)
+    user.password_changed_at = Time.zone.now.ago(5.month)
     assert user.need_change_password?
   end
 end
