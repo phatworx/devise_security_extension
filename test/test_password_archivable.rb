@@ -68,18 +68,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'deny_newer_password_than can be set to deny more passwords' do
-    class ::User
-      def archive_count
-        1
-      end
-      def deny_old_passwords
-        true
-      end
-      def deny_newer_password_than
-        7.days
-      end
-    end
-
+    Devise.deny_newer_password_than = 7.days
     user = User.create password: 'password1', password_confirmation: 'password1'
 
     5.times do |x|
@@ -93,5 +82,6 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     end
 
     assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    Devise.deny_newer_password_than = nil
   end
 end

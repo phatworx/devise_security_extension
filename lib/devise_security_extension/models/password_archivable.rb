@@ -71,8 +71,12 @@ module Devise
       def archive_password
         if encrypted_password_changed?
           if archive_count.to_i > 0 or deny_newer_password_than > 0
-            count = [old_passwords_to_be_denied.count, archive_count].max
             old_passwords.create! old_password_params
+            count = if deny_newer_password_than > 0
+              [old_passwords_to_be_denied.count, archive_count].max
+            else
+              archive_count
+            end
             old_passwords.order(:id).reverse_order.offset(count).destroy_all
           else
             old_passwords.destroy_all
