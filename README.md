@@ -1,5 +1,7 @@
 # Devise Security Extension
 
+[![Build Status](https://travis-ci.org/phatworx/devise_security_extension.svg?branch=master)](https://travis-ci.org/phatworx/devise_security_extension)
+
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
 It is composed of 7 additional Devise modules:
