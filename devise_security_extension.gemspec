@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'rails_email_validator', '~> 0'
+  s.add_development_dependency 'coveralls'
 end
