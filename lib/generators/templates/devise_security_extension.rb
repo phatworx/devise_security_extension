@@ -6,7 +6,7 @@ Devise.setup do |config|
   # config.expire_password_after = false
 
   # Need 1 char of A-Z, a-z and 0-9
-  # config.password_regex = /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])/
+  # config.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
   # How many passwords to keep in archive
   # config.password_archiving_count = 5
