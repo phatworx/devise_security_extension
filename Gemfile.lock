@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     devise_security_extension (0.10.0)
-      devise (>= 3.0.0, < 4.0)
+      devise (>= 3.0.0, < 5.0)
       railties (>= 3.2.6, < 5.0)
 
 GEM
@@ -45,7 +45,7 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     ast (2.2.0)
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     builder (3.2.2)
     concurrent-ruby (1.0.0)
     coveralls (0.8.13)
@@ -54,12 +54,11 @@ GEM
       term-ansicolor (~> 1.3)
       thor (~> 0.19.1)
       tins (~> 1.6.0)
-    devise (3.5.6)
+    devise (4.1.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.1)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
@@ -119,7 +118,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (10.5.0)
-    responders (2.1.1)
+    responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rmagick (2.15.4)
     rspec-core (3.4.3)
@@ -185,4 +184,4 @@ DEPENDENCIES
   sqlite3 (~> 1.3.10)
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
