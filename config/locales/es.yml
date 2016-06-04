@@ -1,0 +1,17 @@
+es:
+  errors:
+    messages:
+      taken_in_past: "la contraseña fue usada previamente, favor elegir otra."
+      equal_to_current_password: "tiene que ser diferente a la contraseña actual."
+      password_format: "tiene que contener mayúsculas, minúsculas y digitos "
+  devise:
+    invalid_captcha: "El captcha ingresado es inválido."
+    invalid_security_question: "La respuesta a la pregunta de suguridad fue incorrecta."
+    paranoid_verify:
+      code_required: "Por favor ingrese el código provisto por nuestro equipo de soporte"
+    password_expired:
+      updated: "Su nueva contraña ha sido guardada."
+      change_required: "Su contraña ha expirado. Por favor renueve su contraseña."
+    failure:
+      session_limited: 'Sus credenciales de inicio de sesión fueron usadas en otro navegador. Por favor inicie sesión nuevamente para continuar en éste navegador.'
+      expired: 'Su cuenta ha expirado debido a inactividad. Por favor contacte al administrador de la aplicación.'
