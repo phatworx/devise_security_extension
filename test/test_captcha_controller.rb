@@ -28,7 +28,7 @@ class TestWithCaptcha < ActionController::TestCase
       password: "wrongpassword"
     }
 
-    assert_equal "Invalid email or password.", flash[:alert]
+    assert_equal "Invalid Email or password.", flash[:alert]
   end
 end
 
@@ -46,7 +46,7 @@ class TestWithoutCaptcha < ActionController::TestCase
       password: "wrongpassword"
     }
 
-    assert_equal "Invalid email or password.", flash[:alert]
+    assert_equal "Invalid Email or password.", flash[:alert]
   end
 end
 
