@@ -1,5 +1,8 @@
 ENV['RAILS_ENV'] ||= 'test'
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
