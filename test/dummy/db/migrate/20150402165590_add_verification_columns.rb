@@ -1,4 +1,4 @@
-class AddVerificationColumns < ActiveRecord::Migration
+class AddVerificationColumns < MIGRATION_CLASS
   def self.up
     add_column :users, :paranoid_verification_code, :string
     add_column :users, :paranoid_verified_at, :datetime

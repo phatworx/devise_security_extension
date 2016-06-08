@@ -1,4 +1,4 @@
-class AddSecurityQuestionsFields < ActiveRecord::Migration
+class AddSecurityQuestionsFields < MIGRATION_CLASS
   def change
     add_column :users, :locked_at, :datetime
     add_column :users, :unlock_token, :string
