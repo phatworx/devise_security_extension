@@ -13,7 +13,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
 
   test 'should render show' do
     get :show
-    assert_template :show
+    assert_includes @response.body, 'Renew your password'
   end
 
   test 'shold update password' do
