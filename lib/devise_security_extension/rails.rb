@@ -1,3 +1,5 @@
+require "active_support"
+
 module DeviseSecurityExtension
   class Engine < ::Rails::Engine
     ActiveSupport.on_load(:action_controller) do
