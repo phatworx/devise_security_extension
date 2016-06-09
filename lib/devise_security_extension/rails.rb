@@ -1,4 +1,4 @@
-require "active_support"
+require "active_support/reloader"
 
 module DeviseSecurityExtension
   class Engine < ::Rails::Engine
