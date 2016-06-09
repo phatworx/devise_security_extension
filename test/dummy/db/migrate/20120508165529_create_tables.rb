@@ -15,7 +15,7 @@ class CreateTables < MIGRATION_CLASS
     create_table :secure_users do |t|
       t.string :email
       t.string :encrypted_password, null: false, default: ''
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :old_passwords do |t|
