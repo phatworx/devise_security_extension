@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TestWithCaptcha < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   tests Captcha::SessionsController
 
   setup do
@@ -33,7 +33,7 @@ class TestWithCaptcha < ActionController::TestCase
 end
 
 class TestWithoutCaptcha < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   tests Devise::SessionsController
 
   setup do
