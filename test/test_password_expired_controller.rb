@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class Devise::PasswordExpiredControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -13,7 +13,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
 
   test 'should render show' do
     get :show
-    assert_template :show
+    assert_includes @response.body, 'Renew your password'
   end
 
   test 'shold update password' do
