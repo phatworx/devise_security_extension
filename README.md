@@ -51,7 +51,7 @@ gem 'rails_email_validator'
 
 
 ### Configuring views
-The view generator in Devise Security extensions works the same way as in Devise does.
+The view generator in Devise Security extensions works the same way as the view generator in [Devise](https://github.com/plataformatec/devise) does.
 
 If you would like to change the default views, you just need to invoke the following generator, and it will copy all views to your application:
 
