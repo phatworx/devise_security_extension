@@ -9,9 +9,11 @@ class TestWithCaptcha < ActionController::TestCase
   end
 
   test 'When captcha is enabled, it is inserted correctly' do
-    post :create, captcha_user: {
-      email: "wrong@email.com",
-      password: "wrongpassword"
+    post :create, {
+      captcha_user: {
+        email: "wrong@email.com",
+        password: "wrongpassword"
+      }
     }
 
     assert_equal "The captcha input was invalid.", flash[:alert]
@@ -23,9 +25,12 @@ class TestWithCaptcha < ActionController::TestCase
       true
     end
 
-    post :create, captcha: "ABCDE", captcha_user: {
-      email: "wrong@email.com",
-      password: "wrongpassword"
+    post :create, { 
+      captcha: "ABCDE", 
+      captcha_user: {
+        email: "wrong@email.com",
+        password: "wrongpassword"
+      }
     }
 
     assert_equal "Invalid Email or password.", flash[:alert]
@@ -41,9 +46,11 @@ class TestWithoutCaptcha < ActionController::TestCase
   end
 
   test 'When captcha is not enabled, it is not inserted' do
-    post :create, user: {
-      email: "wrong@email.com",
-      password: "wrongpassword"
+    post :create, { 
+      user: {
+        email: "wrong@email.com",
+        password: "wrongpassword"
+      }
     }
 
     assert_equal "Invalid Email or password.", flash[:alert]

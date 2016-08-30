@@ -1,4 +1,4 @@
-class CreateTables < ActiveRecord::Migration
+class CreateTables < MIGRATION_CLASS
   def self.up
     create_table :users do |t|
       t.string :username
@@ -15,7 +15,7 @@ class CreateTables < ActiveRecord::Migration
     create_table :secure_users do |t|
       t.string :email
       t.string :encrypted_password, null: false, default: ''
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :old_passwords do |t|
