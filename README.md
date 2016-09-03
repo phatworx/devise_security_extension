@@ -49,6 +49,31 @@ for `:secure_validatable` you need to add
 gem 'rails_email_validator'
 ```
 
+
+### Configuring views
+The view generator in Devise Security extensions works the same way as the view generator in [Devise](https://github.com/plataformatec/devise) does.
+
+If you would like to change the default views, you just need to invoke the following generator, and it will copy all views to your application:
+
+```console
+$ rails g devise_security_extension:views
+```
+
+If you have more than one Devise model in your application (such as `User` and `Admin`), you will notice that Devise uses the same views for all models. Fortunately, Devise offers an easy way to customize views. All you need to do is set `config.scoped_views = true` inside the `config/initializers/devise.rb` file.
+
+After doing so, you will be able to have views based on the role like `users/sessions/new` and `admins/sessions/new`. If no view is found within the scope, Devise will use the default view at `devise/sessions/new`. You can also use the generator to generate scoped views:
+
+```console
+$ rails generate devise_security_extension:views users
+```
+
+If you would like to generate only a few sets of views, like the ones for the `registerable` and `confirmable` module,
+you can pass a list of modules to the generator with the `-v` flag.
+
+```console
+$ rails generate devise_security_extension:views -v paranoid_verification_code password_expired
+```
+
 ## Configuration
 
 ```ruby
