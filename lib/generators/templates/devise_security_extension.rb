@@ -14,6 +14,10 @@ Devise.setup do |config|
   # Deny old password (true, false, count)
   # config.deny_old_passwords = true
 
+  # Deny all password more recent than X days
+  # default to nil when unused
+  # config.deny_newer_password_than = 90.days
+
   # enable email validation for :secure_validatable. (true, false, validation_options)
   # dependency: need an email validator like rails_email_validator
   # config.email_validation = true

@@ -6,7 +6,7 @@ module Devise
 
       included do
         has_many :old_passwords, as: :password_archivable, dependent: :destroy
-        before_update :archive_password
+        before_update :archive_password, if: :encrypted_password_changed?
         validate :validate_password_archive
       end
 
@@ -16,17 +16,9 @@ module Devise
 
       # validate is the password used in the past
       def password_archive_included?
-        unless deny_old_passwords.is_a? Fixnum
-          if deny_old_passwords.is_a? TrueClass and archive_count > 0
-            self.deny_old_passwords = archive_count
-          else
-            self.deny_old_passwords = 0
-          end
-        end
-
-        if self.class.deny_old_passwords > 0 and not self.password.nil?
-          old_passwords_including_cur_change = self.old_passwords.order(:id).reverse_order.limit(self.class.deny_old_passwords).to_a
-          old_passwords_including_cur_change << OldPassword.new(old_password_params)  # include most recent change in list, but don't save it yet!
+        if deny_old_passwords > 0 and !password.nil?
+          old_passwords_including_cur_change = old_passwords_to_be_denied.to_a
+          old_passwords_including_cur_change << OldPassword.new(old_password_params) # include most recent change in list, but don't save it yet!
           old_passwords_including_cur_change.each do |old_password|
             dummy                    = self.class.new
             dummy.encrypted_password = old_password.encrypted_password
@@ -43,37 +35,57 @@ module Devise
       end
 
       def deny_old_passwords
-        self.class.deny_old_passwords
-      end
-
-      def deny_old_passwords=(count)
-        self.class.deny_old_passwords = count
+        case self.class.deny_old_passwords
+        when Fixnum
+          self.class.deny_old_passwords
+        when TrueClass
+          self.class.deny_old_passwords = archive_count
+        else
+          self.class.deny_old_passwords = 0
+        end
       end
 
       def archive_count
         self.class.password_archiving_count
       end
 
+      def deny_newer_password_than
+        self.class.deny_newer_password_than.to_i
+      end
+
       private
 
-      # archive the last password before save and delete all to old passwords from archive
+      def old_passwords_to_be_denied
+        if deny_newer_password_than > 0
+          rel = old_passwords.where("created_at > ?", Time.zone.now - deny_newer_password_than)
+          # if there are more archived passwords within the configured timeframe
+          # than what you would otherwise deny take that list.
+          return rel if rel.count > deny_old_passwords
+        end
+        # less passwords were found, use default last X passwords to be denied.
+        old_passwords.order(:id).reverse_order.limit(deny_old_passwords)
+      end
+
+      # archive the last password before save and delete all too old passwords from archive
       def archive_password
-        if encrypted_password_changed?
-          if archive_count.to_i > 0
-            old_passwords.create! old_password_params
-            old_passwords.order(:id).reverse_order.offset(archive_count).destroy_all
-          else
-            old_passwords.destroy_all
-          end
+        if archive_count.to_i > 0 or deny_newer_password_than > 0
+          old_passwords.create! old_password_params
+          current_count = deny_newer_password_than > 0 ? old_passwords_to_be_denied.count : 0
+          old_passwords.order(:id).reverse_order.offset([current_count, archive_count].max).destroy_all
+        else
+          old_passwords.destroy_all
         end
       end
 
       def old_password_params
-        { encrypted_password: encrypted_password_change.first }
+        { encrypted_password: encrypted_password_change.first, created_at: Time.zone.now }
       end
 
       module ClassMethods
-        ::Devise::Models.config(self, :password_archiving_count, :deny_old_passwords)
+        ::Devise::Models.config(self,
+          :password_archiving_count,
+          :deny_old_passwords,
+          :deny_newer_password_than)
       end
     end
   end

@@ -23,6 +23,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'cannot use archived passwords' do
     assert_equal 2, Devise.password_archiving_count
+    assert_equal nil, Devise.deny_newer_password_than
 
     user = User.create password: 'password1', password_confirmation: 'password1'
     assert_equal 0, OldPassword.count
@@ -31,12 +32,19 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     assert_equal 1, OldPassword.count
 
     assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password2') }
 
     set_password(user,  'password3')
     assert_equal 2, OldPassword.count
 
     # rotate first password out of archive
     assert set_password(user,  'password4')
+    assert_equal 0, user.deny_newer_password_than
+    assert_equal 2, OldPassword.count
+
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password2') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password3') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password4') }
 
     # archive count was 2, so first password should work again
     assert set_password(user,  'password1')
@@ -57,5 +65,23 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password2') }
 
     assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+  end
+
+  test 'deny_newer_password_than can be set to deny more passwords' do
+    Devise.deny_newer_password_than = 7.days
+    user = User.create password: 'password1', password_confirmation: 'password1'
+
+    5.times do |x|
+      assert set_password(user,  "new password #{x}")
+    end
+
+    assert_equal 5, OldPassword.count
+
+    5.times do |x|
+      assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  "new password #{x}") }
+    end
+
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    Devise.deny_newer_password_than = nil
   end
 end

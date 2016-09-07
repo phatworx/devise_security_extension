@@ -49,7 +49,7 @@ class TestParanoidVerification < ActiveSupport::TestCase
   test 'when code match upon verification code, should set when verification was accepted' do
     user = User.new(paranoid_verification_code: 'abcde')
     user.verify_code('abcde')
-    assert_in_delta(4, Time.now.to_i, user.paranoid_verified_at.to_i)
+    assert_in_delta(4, Time.zone.now.to_i, user.paranoid_verified_at.to_i)
   end
 
   test 'when code not match upon verify code, should still need verification' do
