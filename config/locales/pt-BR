@@ -1,0 +1,16 @@
+pt-BR:
+  errors:
+    messages:
+      taken_in_past: "já usado anteriormente."
+      equal_to_current_password: "precisa ser diferente da senha atual."
+      password_format: "precisa conter letras maiúsculas, minúsculas e números"
+  devise:
+    invalid_captcha: "O captcha informado é invalido."
+    paranoid_verify:
+      code_required: "Por favor, informe o código enviado pela nossa equipe de suporte"
+    password_expired:
+      updated: "Sua nova senha foi salva."
+      change_required: "Sua senha expirou. Por favor, renove sua senha."
+    failure:
+      session_limited: 'Suas credenciais estão sendo usada em outro navegador. Voce precisa fazer login novamente para continuar neste navegador.'
+      expired: 'Sua conta expirou devido a inatividade. Por favor, contate o administrator.'
