@@ -13,7 +13,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is enabled, it is inserted correctly' do
-    post :create, {
+    post :create, params: {
       security_question_user: {
         email: @user.email
       }, security_question_answer: "wrong answer"
@@ -24,7 +24,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security_question is valid, it runs as normal' do
-    post :create, {
+    post :create, params: {
       security_question_user: {
         email: @user.email
       }, security_question_answer: @user.security_question_answer
@@ -48,7 +48,7 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is not enabled it is not inserted' do
-    post :create, {
+    post :create, params: {
       user: {
         email: @user.email
       }
@@ -58,4 +58,3 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
     assert_redirected_to new_user_session_path
   end
 end
-

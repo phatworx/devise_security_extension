@@ -9,7 +9,7 @@ class TestWithCaptcha < ActionController::TestCase
   end
 
   test 'When captcha is enabled, it is inserted correctly' do
-    post :create, {
+    post :create, params: {
       captcha_user: {
         email: "wrong@email.com",
         password: "wrongpassword"
@@ -25,8 +25,8 @@ class TestWithCaptcha < ActionController::TestCase
       true
     end
 
-    post :create, { 
-      captcha: "ABCDE", 
+    post :create, params: {
+      captcha: "ABCDE",
       captcha_user: {
         email: "wrong@email.com",
         password: "wrongpassword"
@@ -46,7 +46,7 @@ class TestWithoutCaptcha < ActionController::TestCase
   end
 
   test 'When captcha is not enabled, it is not inserted' do
-    post :create, { 
+    post :create, params: { 
       user: {
         email: "wrong@email.com",
         password: "wrongpassword"
@@ -56,4 +56,3 @@ class TestWithoutCaptcha < ActionController::TestCase
     assert_equal "Invalid Email or password.", flash[:alert]
   end
 end
-
