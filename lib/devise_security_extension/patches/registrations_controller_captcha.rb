@@ -5,7 +5,7 @@ module DeviseSecurityExtension::Patches
       define_method :create do |&block|
         build_resource(sign_up_params)
 
-        if ((defined? verify_recaptcha) && (verify_recaptcha)) or ((defined? valid_captcha?) && (valid_captcha? params[:captcha]))
+        if ((defined? verify_recaptcha) && (verify_recaptcha)) || ((defined? valid_captcha?) && (valid_captcha? params[:captcha]))
           if resource.save
             block.call(resource) if block
             if resource.active_for_authentication?
@@ -21,7 +21,7 @@ module DeviseSecurityExtension::Patches
             clean_up_passwords resource
             respond_with resource
           end
-          
+
         else
           resource.errors.add :base, t('devise.invalid_captcha')
           clean_up_passwords resource
