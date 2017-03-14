@@ -58,7 +58,7 @@ module Devise
         if not self.new_record? && !self.encrypted_password_change.nil?
           dummy = self.class.new
           dummy.encrypted_password = self.encrypted_password_change.first
-          dummy.password_salt = self.password_salt_change.first if self.respond_to? :password_salt_change && !self.password_salt_change.nil?
+          dummy.password_salt = self.password_salt_change.first if self.respond_to?(:password_salt_change) && !self.password_salt_change.nil?
           self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
         end
       end
