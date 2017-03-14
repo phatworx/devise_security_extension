@@ -55,7 +55,7 @@ module Devise
       end
 
       def current_equal_password_validation
-        if not self.new_record? && !self.encrypted_password_change.nil?
+        if !self.new_record? && !self.encrypted_password_change.nil?
           dummy = self.class.new
           dummy.encrypted_password = self.encrypted_password_change.first
           dummy.password_salt = self.password_salt_change.first if self.respond_to?(:password_salt_change) && !self.password_salt_change.nil?
