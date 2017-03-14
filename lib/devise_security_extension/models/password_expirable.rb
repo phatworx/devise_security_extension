@@ -13,8 +13,8 @@ module Devise
 
       # is an password change required?
       def need_change_password?
-        if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
-          self.password_changed_at.nil? or self.password_changed_at < self.expire_password_after.seconds.ago
+        if self.expire_password_after.is_a?(Fixnum) || self.expire_password_after.is_a?(Float)
+          self.password_changed_at.nil? || self.password_changed_at < self.expire_password_after.seconds.ago
         else
           false
         end
@@ -22,7 +22,7 @@ module Devise
 
       # set a fake datetime so a password change is needed and save the record
       def need_change_password!
-        if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
+        if self.expire_password_after.is_a?(Fixnum) || self.expire_password_after.is_a?(Float)
           need_change_password
           self.save(:validate => false)
         end
@@ -30,7 +30,7 @@ module Devise
 
       # set a fake datetime so a password change is needed
       def need_change_password
-        if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
+        if self.expire_password_after.is_a?(Fixnum) || self.expire_password_after.is_a?(Float)
           self.password_changed_at = self.expire_password_after.seconds.ago
         end
 
@@ -39,7 +39,7 @@ module Devise
 
         self.password_changed_at
       end
-      
+
       def expire_password_after
         self.class.expire_password_after
       end
@@ -48,7 +48,7 @@ module Devise
 
         # is password changed then update password_cahanged_at
         def update_password_changed
-          self.password_changed_at = Time.now if (self.new_record? or self.encrypted_password_changed?) and not self.password_changed_at_changed?
+          self.password_changed_at = Time.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed?
         end
 
       module ClassMethods
