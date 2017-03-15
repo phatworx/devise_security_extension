@@ -10,9 +10,7 @@ AllCops:
     - 'bin/**/*'
     - 'vendor/bundle/**/*'
     - 'spec/support/**/*' # rspec support helpers have a strange api
-
-Rails:
-  Enabled: true
+  RunRailsCops: true
 
 # We don't care about method length, since we check method cyclomatic
 # complexity.
@@ -21,9 +19,7 @@ Metrics/MethodLength:
 
 # Trailing commas make for clearer diffs because the last line won't appear
 # to have been changed, as it would if it lacked a comma and had one added.
-Style/TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: comma
-Style/TrailingCommaInArguments:
+Style/TrailingComma:
   EnforcedStyleForMultiline: comma
 
 # Cop supports --auto-correct.
