@@ -17,4 +17,3 @@ module DeviseSecurityExtension::Patches
     end
   end
 end
-
