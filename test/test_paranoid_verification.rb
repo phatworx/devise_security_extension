@@ -61,7 +61,7 @@ class TestParanoidVerification < ActiveSupport::TestCase
   test 'when code not match upon verification code, should not set paranoid_verified_at' do
     user = User.new(paranoid_verification_code: 'abcde')
     user.verify_code('wrong')
-    assert_equal(nil, user.paranoid_verified_at)
+    assert_nil(user.paranoid_verified_at)
   end
 
   test 'when code not match upon verification code too many attempts should generate new code' do
