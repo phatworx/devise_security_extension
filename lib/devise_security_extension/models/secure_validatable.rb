@@ -42,7 +42,7 @@ module Devise
           end
 
           # extra validations
-          validates_format_of :email, :with => Devise.email_regexp # use rails_email_validator or similar
+          validates_format_of :email, :with => Devise.email_regexp
           validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
 
           # don't allow use same password
