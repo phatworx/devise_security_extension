@@ -13,7 +13,9 @@ module Devise
 
       # is an password change required?
       def need_change_password?
-        if self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
+        if defined?(ActiveSupport::Duration) && self.expire_password_after.is_a?(ActiveSupport::Duration)
+          self.password_changed_at.nil? or self.password_changed_at < self.expire_password_after.ago
+        elsif self.expire_password_after.is_a? Fixnum or self.expire_password_after.is_a? Float
           self.password_changed_at.nil? or self.password_changed_at < self.expire_password_after.seconds.ago
         else
           false
@@ -39,7 +41,7 @@ module Devise
 
         self.password_changed_at
       end
-      
+
       def expire_password_after
         self.class.expire_password_after
       end
