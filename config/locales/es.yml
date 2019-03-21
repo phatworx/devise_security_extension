@@ -1,6 +1,7 @@
 es:
   errors:
     messages:
+      password_confirmation_mismatched: "no coinciden."
       taken_in_past: "la contraseña fue usada previamente, favor elegir otra."
       equal_to_current_password: "tiene que ser diferente a la contraseña actual."
       password_format: "tiene que contener mayúsculas, minúsculas y digitos "

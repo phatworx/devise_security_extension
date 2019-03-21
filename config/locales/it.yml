@@ -1,6 +1,7 @@
 it:
   errors:
     messages:
+      password_confirmation_mismatched: "non corrispondenti."
       taken_in_past: "e' stata gia' utilizzata in passato!"
       equal_to_current_password: " deve essere differente dalla password corrente!"
   devise:
