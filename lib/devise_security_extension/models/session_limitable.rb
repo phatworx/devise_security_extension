@@ -12,7 +12,7 @@ module Devise
 
       def update_unique_session_id!(unique_session_id)
         self.unique_session_id = unique_session_id
-
+        flash[:notice] = "You have been logged out because you signed in on another device/browser"
         save(:validate => false)
       end
 
