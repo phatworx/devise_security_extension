@@ -21,6 +21,7 @@ Warden::Manager.after_set_user :only => :fetch do |record, warden, options|
     if record.unique_session_id != warden.session(scope)['unique_session_id'] && !env['devise.skip_session_limitable']
       warden.raw_session.clear
       warden.logout(scope)
+      flash[:notice] = "You have been logged out because you signed in on another device"
       throw :warden, :scope => scope, :message => :session_limited
     end
   end
