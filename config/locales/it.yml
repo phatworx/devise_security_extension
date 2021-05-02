@@ -3,8 +3,12 @@ it:
     messages:
       taken_in_past: "e' stata gia' utilizzata in passato!"
       equal_to_current_password: " deve essere differente dalla password corrente!"
+      password_format: "deve contenere lettere maiuscole, minuscole e caratteri numerici"
   devise:
     invalid_captcha: "Il captcha inserito non e' valido!"
     password_expired:
       updated: "La tua nuova password e' stata salvata."
       change_required: "La tua password e' scaduta. Si prega di rinnovarla!"
+    failure:
+      session_limited: 'Le tue credenziali sono state utilizzare in un altro browser. Autenticati nuovamente per continuare la navigazione.'
+      expired: "Il tuo account è stato disabilitato a causa di inattività. Si prega di contattare l'amministratore."
