@@ -73,13 +73,17 @@ module DeviseSecurityExtension
         def change_password_required_path_for(resource_or_scope = nil)
           scope       = Devise::Mapping.find_scope!(resource_or_scope)
           change_path = "#{scope}_password_expired_path"
-          send(change_path)
+          _devise_security_extention_route_context.send(change_path)
         end
 
         def paranoid_verification_code_path_for(resource_or_scope = nil)
           scope       = Devise::Mapping.find_scope!(resource_or_scope)
           change_path = "#{scope}_paranoid_verification_code_path"
-          send(change_path)
+          _devise_security_extention_route_context.send(change_path)
+        end
+
+        def _devise_security_extention_route_context
+          @_devise_security_extention_route_context ||= send(Devise.available_router_name)
         end
 
         protected
