@@ -12,7 +12,7 @@ It is composed of 7 additional Devise modules:
 * `:session_limitable` - ensures, that there is only one session usable per account at once
 * `:expirable` - expires a user account after x days of inactivity (default 90 days)
 * `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
-* `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
+* `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he won't be able to use the application.
 
 Configuration and database schema for each module below.
 
